@@ -2,11 +2,8 @@ package org.firstinspires.ftc.teamcode.Teste.Module;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.CRServo;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.teamcode.Demo.Module.IntakeModule;
+import org.firstinspires.ftc.teamcode.Meeturi.Module.IntakeModule;
 
 @TeleOp
 public class Test_intake extends LinearOpMode {

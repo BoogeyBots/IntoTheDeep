@@ -11,11 +11,10 @@
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 57,
-      "versionName": "10.1.1",
+      "versionCode": 56,
+      "versionName": "10.1",
       "outputFile": "TeamCode-debug.apk"
     }
   ],
-  "elementType": "File",
-  "minSdkVersionForDexing": 24
+  "elementType": "File"
 }

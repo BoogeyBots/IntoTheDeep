@@ -2,10 +2,13 @@
 manifest
 ADDED from /home/boogeybots/IntoTheDeep/FtcRobotController/src/main/AndroidManifest.xml:2:1-79:12
 INJECTED from /home/boogeybots/IntoTheDeep/FtcRobotController/src/main/AndroidManifest.xml:2:1-79:12
+INJECTED from /home/boogeybots/IntoTheDeep/FtcRobotController/src/main/AndroidManifest.xml:2:1-79:12
 	package
 		INJECTED from /home/boogeybots/IntoTheDeep/FtcRobotController/src/main/AndroidManifest.xml
+		ADDED from /home/boogeybots/IntoTheDeep/FtcRobotController/src/main/AndroidManifest.xml:2:1-79:12
+		INJECTED from /home/boogeybots/IntoTheDeep/FtcRobotController/src/main/AndroidManifest.xml
 	android:versionName
-		ADDED from /home/boogeybots/IntoTheDeep/FtcRobotController/src/main/AndroidManifest.xml:5:11-39
+		ADDED from /home/boogeybots/IntoTheDeep/FtcRobotController/src/main/AndroidManifest.xml:5:11-37
 	xmlns:tools
 		ADDED from /home/boogeybots/IntoTheDeep/FtcRobotController/src/main/AndroidManifest.xml:3:11-57
 	xmlns:android
@@ -122,7 +125,13 @@ uses-sdk
 INJECTED from /home/boogeybots/IntoTheDeep/FtcRobotController/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/boogeybots/IntoTheDeep/FtcRobotController/src/main/AndroidManifest.xml
 INJECTED from /home/boogeybots/IntoTheDeep/FtcRobotController/src/main/AndroidManifest.xml
+INJECTED from /home/boogeybots/IntoTheDeep/FtcRobotController/src/main/AndroidManifest.xml
+INJECTED from /home/boogeybots/IntoTheDeep/FtcRobotController/src/main/AndroidManifest.xml
 	android:targetSdkVersion
 		INJECTED from /home/boogeybots/IntoTheDeep/FtcRobotController/src/main/AndroidManifest.xml
+		ADDED from /home/boogeybots/IntoTheDeep/FtcRobotController/src/main/AndroidManifest.xml
+		INJECTED from /home/boogeybots/IntoTheDeep/FtcRobotController/src/main/AndroidManifest.xml
 	android:minSdkVersion
+		INJECTED from /home/boogeybots/IntoTheDeep/FtcRobotController/src/main/AndroidManifest.xml
+		ADDED from /home/boogeybots/IntoTheDeep/FtcRobotController/src/main/AndroidManifest.xml
 		INJECTED from /home/boogeybots/IntoTheDeep/FtcRobotController/src/main/AndroidManifest.xml
