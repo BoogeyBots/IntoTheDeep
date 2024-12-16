@@ -1,59 +1,51 @@
 package org.firstinspires.ftc.teamcode.Demo.Module;
 
-import com.qualcomm.robotcore.hardware.CRServo;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.acmerobotics.dashboard.config.Config;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+@Config
 
 public class IntakeModule {
     HardwareMap hardwareMap;
     public IntakeModule (HardwareMap hardwareMap) {
         this.hardwareMap = hardwareMap;
     }
-    CRServo intake_right, intake_left, intake_roata;
     Servo rotire_left, rotire_right;
+    DcMotorEx motor;
+
+    //public static double power;
+    public static double servo_poz = 0.0989;
 
     public void init() {
-        intake_right = hardwareMap.get(CRServo.class, "intake_right");
-        intake_left = hardwareMap.get(CRServo.class, "intake_left");
-
         rotire_right = hardwareMap.get(Servo.class, "rotire_right");
         rotire_left = hardwareMap.get(Servo.class, "rotire_left");
+        motor = hardwareMap.get(DcMotorEx.class, "motor_intake");
 
-        intake_roata = hardwareMap.get(CRServo.class, "intake_roata");
-
-        intake_left.setDirection(DcMotorSimple.Direction.REVERSE);
-
-        rotire_right.setPosition(0.7172);
-        rotire_left.setPosition(1 - 0.7172);
+        rotire_right.setPosition(0.0989);
+        rotire_left.setPosition(0.0989);
 
     }
 
-    public void trage() {
-        intake_right.setPower(1);
-        intake_left.setPower(1);
-        intake_roata.setPower(1);
+    public void trage(double power) {
+        motor.setPower(-power);
     }
 
-    public void scuipa() {
-        intake_right.setPower(-1);
-        intake_left.setPower(-1);
-        intake_roata.setPower(-1);
+    public void scuipa(double power) {
+        motor.setPower(power);
     }
 
     public void stop() {
-        intake_right.setPower(0);
-        intake_left.setPower(0);
-        intake_roata.setPower(0);
+        motor.setPower(0);
     }
 
     public void jos() {
-        rotire_right.setPosition(0.3306);
-        rotire_left.setPosition(1 - 0.3306);
+        rotire_right.setPosition(servo_poz); //0.3333 && 0.4
+        rotire_left.setPosition(servo_poz);
     }
 
     public void sus() {
-        rotire_right.setPosition(0.49);
-        rotire_left.setPosition(1 - 0.49);
+        rotire_right.setPosition(0.0989);
+        rotire_left.setPosition(0.0989);
     }
 }

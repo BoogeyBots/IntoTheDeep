@@ -16,7 +16,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 @Config
 @TeleOp (name = "Extendo")
-public class PID_extendo extends LinearOpMode{
+public class PID_extendo extends LinearOpMode {
     public DcMotorEx motor;
     int poz_min = 0;
     int poz_max = 2000;
@@ -33,13 +33,13 @@ public class PID_extendo extends LinearOpMode{
         telemetry = dashboard.getTelemetry();
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
-        motor = hardwareMap.get(DcMotorEx.class, "motor");
+        motor = hardwareMap.get(DcMotorEx.class, "motor_extendo");
 
         rotire_right = hardwareMap.get(Servo.class, "rotire_right");
         rotire_left = hardwareMap.get(Servo.class, "rotire_left");
 
-        rotire_right.setPosition(0.49);
-        rotire_left.setPosition(1 - 0.49);
+        rotire_right.setPosition(0.0989);
+        rotire_left.setPosition(0.0989);
 
         motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
@@ -51,31 +51,12 @@ public class PID_extendo extends LinearOpMode{
 
         while (opModeIsActive()) {
             update();
-            //power = controller.calculate(motorDR_ENC.getCurrentPosition(), 750);
-            //
-            // if (gamepad1.a) {
-            //     motorDR_ENC.setPower(power);
-            //     motorST.setPower(power);
-            // }
-            //
-            //  /*
-            // if(gamepad1.a){
-            //     if(controller.getSetPoint()  >= poz_min && controller.getSetPoint() + modifier <= poz_max){
-            //         controller.setSetPoint(Range.clip(controller.getSetPoint() + modifier, poz_min, poz_max ));
-            //     }
-            // }
-            //
-            // else if(gamepad1.b){
-            //     if(controller.getSetPoint() - modifier >= poz_min && controller.getSetPoint() <= poz_max){
-            //         controller.setSetPoint(Range.clip(controller.getSetPoint() - modifier, poz_min, poz_max ));
-            //     }
-            // }
             if (gamepad1.a) {
                 controller.setSetPoint(600);
             }
 
             if(gamepad1.b) {
-                controller.setSetPoint(1600);
+                controller.setSetPoint(2000);
             }
 
             else {

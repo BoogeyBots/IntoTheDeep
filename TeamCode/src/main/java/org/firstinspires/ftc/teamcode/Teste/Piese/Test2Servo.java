@@ -11,8 +11,8 @@ public class Test2Servo extends LinearOpMode {
     private double modifier = 0.0001;
     @Override
     public void runOpMode() throws InterruptedException {
-        servo1 = hardwareMap.servo.get("servoDR");
-        servo2 = hardwareMap.servo.get("servoST");
+        servo1 = hardwareMap.servo.get("rotire_right");
+        servo2 = hardwareMap.servo.get("rotire_left");
 
         servo1.setPosition(0);
         servo2.setPosition(0);     //0.5789

@@ -11,12 +11,12 @@ public class ExtendoModule {
     public ExtendoModule (HardwareMap hardwareMap) {
         this.hardwareMap = hardwareMap;
     }
-    static double kp = 5, ki = 0.37, kd = 0.17;
+    static double kp = 5, ki = 0, kd = 0;
     DcMotorEx motor;
     PIDController controller = new PIDController(kp, ki, kd);
 
     public void init() {
-        motor = hardwareMap.get(DcMotorEx.class, "motor");
+        motor = hardwareMap.get(DcMotorEx.class, "motor_extendo");
         motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         controller.reset();
@@ -34,7 +34,7 @@ public class ExtendoModule {
     }
 
     public void extinde() {
-        controller.setSetPoint(1600);
+        controller.setSetPoint(2000);
     }
 
     public void acasa() {

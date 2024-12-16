@@ -14,8 +14,8 @@ public class TestMotoare extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         motorST_ENC = hardwareMap.get(DcMotorEx.class, "motorST");
         motorDR = hardwareMap.get(DcMotorEx.class, "motorDR");
-        servoDR = hardwareMap.get(Servo.class, "servoDR");
-        servoST = hardwareMap.get(Servo.class, "servoST");
+        //servoDR = hardwareMap.get(Servo.class, "servoDR");
+        //servoST = hardwareMap.get(Servo.class, "servoST");
 
         motorDR.setDirection(DcMotorSimple.Direction.REVERSE);
 
@@ -25,8 +25,8 @@ public class TestMotoare extends LinearOpMode {
         motorST_ENC.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motorDR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        servoDR.setPosition(0.6);
-        servoST.setPosition(0.6);
+        //servoDR.setPosition(0.6);
+        //servoST.setPosition(0.6);
 
         waitForStart();
 

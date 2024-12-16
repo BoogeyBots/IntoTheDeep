@@ -21,7 +21,7 @@ public class PID_glisiere extends LinearOpMode{
     public Servo servoDR, servoST;
     int poz_min = 0;
     int poz_max = 2000;
-    public static double p = 7, i = 2.7, d = 0.47;
+    public static double p = 0, i = 0, d = 0;
     public static int target = 0;
     int modifier = 10;
     PIDController controller = new PIDController(p, i, d);
@@ -35,8 +35,8 @@ public class PID_glisiere extends LinearOpMode{
 
         motorST_ENC = hardwareMap.get(DcMotorEx.class, "motorST_ENC");
         motorDR = hardwareMap.get(DcMotorEx.class, "motorDR");
-        servoDR = hardwareMap.get(Servo.class, "servoDR");
-        servoST = hardwareMap.get(Servo.class, "servoST");
+        //servoDR = hardwareMap.get(Servo.class, "servoDR");
+        //servoST = hardwareMap.get(Servo.class, "servoST");
 
         motorDR.setDirection(DcMotorSimple.Direction.REVERSE);
 
