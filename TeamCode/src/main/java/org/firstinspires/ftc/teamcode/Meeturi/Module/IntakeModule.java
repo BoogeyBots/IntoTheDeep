@@ -11,28 +11,30 @@ public class IntakeModule {
     public IntakeModule (HardwareMap hardwareMap) {
         this.hardwareMap = hardwareMap;
     }
-    Servo rotire_left, rotire_right;
+    Servo rotire_left, rotire_right, clapita;
     DcMotorEx motor;
 
     //public static double power;
-    public static double servo_poz = 0.0989;
+    public static double poz = 0;
 
     public void init() {
         rotire_right = hardwareMap.get(Servo.class, "rotire_right");
         rotire_left = hardwareMap.get(Servo.class, "rotire_left");
+        clapita = hardwareMap.get(Servo.class, "clapita");
         motor = hardwareMap.get(DcMotorEx.class, "motor_intake");
 
-        rotire_right.setPosition(0.0989);
-        rotire_left.setPosition(0.0989);
+        rotire_right.setPosition(0.3);
+        rotire_left.setPosition(0.3);
+        clapita.setPosition(0.13);
 
     }
 
     public void trage(double power) {
-        motor.setPower(-power);
+        motor.setPower(power);
     }
 
     public void scuipa(double power) {
-        motor.setPower(power);
+        motor.setPower(-power);
     }
 
     public void stop() {
@@ -40,12 +42,20 @@ public class IntakeModule {
     }
 
     public void jos() {
-        rotire_right.setPosition(servo_poz); //0.3333 && 0.4
-        rotire_left.setPosition(servo_poz);
+        rotire_right.setPosition(0.73);
+        rotire_left.setPosition(0.73);
     }
 
     public void sus() {
-        rotire_right.setPosition(0.0989);
-        rotire_left.setPosition(0.0989);
+        rotire_right.setPosition(0.3);
+        rotire_left.setPosition(0.3);
+    }
+
+    public void close() {
+        clapita.setPosition(0.13);
+    }
+
+    public void open() {
+        clapita.setPosition(0.6);
     }
 }

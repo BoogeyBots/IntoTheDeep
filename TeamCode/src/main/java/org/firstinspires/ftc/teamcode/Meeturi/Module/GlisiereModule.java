@@ -11,7 +11,7 @@ public class GlisiereModule {
     public GlisiereModule (HardwareMap hardwareMap) {
         this.hardwareMap = hardwareMap;
     }
-    static double kp = 5, ki = 0, kd = 0;
+    static double kp = 6, ki = 4.3, kd = 0.8;
     DcMotorEx motorST_ENC, motorDR;
     PIDController controller = new PIDController(kp, ki, kd);
 
@@ -28,6 +28,8 @@ public class GlisiereModule {
         motorDR.setDirection(DcMotorSimple.Direction.REVERSE);
 
         controller.reset();
+
+        controller.setSetPoint(0);
     }
 
     public void update() {
@@ -41,12 +43,18 @@ public class GlisiereModule {
         }
     }
 
-    public void goUp() {
-        controller.setSetPoint(1650);
+    public void basket() {
+        controller.setSetPoint(2470);
     }
 
     public void goDown() {
         controller.setSetPoint(0);
     }
+
+    public void hang() {controller.setSetPoint(850);}
+
+    public void altcv() {controller.setSetPoint(760);}
+
+    public void specimen() {controller.setSetPoint(650);}
 
 }

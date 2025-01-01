@@ -1,13 +1,15 @@
 package org.firstinspires.ftc.teamcode.Teste.Piese;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
-
+@Config
 @TeleOp(name = "Testăm 2 servo-uri cică")
 public class Test2Servo extends LinearOpMode {
     private Servo servo1, servo2;
+    public static double poz = 0;
     private double modifier = 0.0001;
     @Override
     public void runOpMode() throws InterruptedException {
@@ -20,7 +22,7 @@ public class Test2Servo extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-            if(gamepad1.a) {
+            /*if(gamepad1.a) {
                 servo1.setPosition(servo1.getPosition() + modifier);
                 servo2.setPosition(servo2.getPosition() + modifier);
 
@@ -31,15 +33,13 @@ public class Test2Servo extends LinearOpMode {
                 servo2.setPosition(servo2.getPosition() - modifier);
             }
 
-            /*if(gamepad1.x) {
-                servo2.setPosition(servo2.getPosition() + modifier);
-            }
-
-            if(gamepad1.y) {
-                servo2.setPosition(servo2.getPosition() - modifier);
-            }
-
              */
+            
+            if(gamepad1.a) {
+                servo1.setPosition(poz);
+                servo2.setPosition(poz);
+            }
+
 
             telemetry.addData("Servo1: ", servo1.getPosition());
             telemetry.addData("Servo2: ", servo2.getPosition());

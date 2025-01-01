@@ -38,12 +38,14 @@ public class PID_extendo extends LinearOpMode {
         rotire_right = hardwareMap.get(Servo.class, "rotire_right");
         rotire_left = hardwareMap.get(Servo.class, "rotire_left");
 
-        rotire_right.setPosition(0.0989);
-        rotire_left.setPosition(0.0989);
+        rotire_right.setPosition(0.12);
+        rotire_left.setPosition(0.12);
 
         motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        motor.setDirection(DcMotorSimple.Direction.REVERSE);
 
         controller.reset();
 

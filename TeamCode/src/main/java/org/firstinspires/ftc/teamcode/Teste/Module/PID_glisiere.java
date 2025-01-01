@@ -1,13 +1,9 @@
 package org.firstinspires.ftc.teamcode.Teste.Module;
 
-
-import static java.lang.Math.abs;
-
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.arcrobotics.ftclib.controller.PIDController;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -21,7 +17,9 @@ public class PID_glisiere extends LinearOpMode{
     public Servo servoDR, servoST;
     int poz_min = 0;
     int poz_max = 2000;
+    
     public static double p = 0, i = 0, d = 0;
+
     public static int target = 0;
     int modifier = 10;
     PIDController controller = new PIDController(p, i, d);
@@ -35,8 +33,8 @@ public class PID_glisiere extends LinearOpMode{
 
         motorST_ENC = hardwareMap.get(DcMotorEx.class, "motorST_ENC");
         motorDR = hardwareMap.get(DcMotorEx.class, "motorDR");
-        //servoDR = hardwareMap.get(Servo.class, "servoDR");
-        //servoST = hardwareMap.get(Servo.class, "servoST");
+        servoDR = hardwareMap.get(Servo.class, "servoDR");
+        servoST = hardwareMap.get(Servo.class, "servoST");
 
         motorDR.setDirection(DcMotorSimple.Direction.REVERSE);
 
@@ -48,8 +46,8 @@ public class PID_glisiere extends LinearOpMode{
 
         controller.reset();
 
-        //servoDR.setPosition(0.6);
-        //servoST.setPosition(0.6);
+        servoDR.setPosition(0.4);
+        servoST.setPosition(0.4);
 
         waitForStart();
 
@@ -61,7 +59,7 @@ public class PID_glisiere extends LinearOpMode{
             }
 
             if(gamepad1.b) {
-                controller.setSetPoint(1600);
+                controller.setSetPoint(target);
             }
 
             else {

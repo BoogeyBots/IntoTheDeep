@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.Meeturi.Module;
 import com.arcrobotics.ftclib.controller.PIDController;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class ExtendoModule {
@@ -10,15 +11,19 @@ public class ExtendoModule {
     public ExtendoModule (HardwareMap hardwareMap) {
         this.hardwareMap = hardwareMap;
     }
-    static double kp = 5, ki = 0, kd = 0;
+    static double kp = 6, ki = 1.5, kd = 0.3;
     DcMotorEx motor;
     PIDController controller = new PIDController(kp, ki, kd);
 
     public void init() {
         motor = hardwareMap.get(DcMotorEx.class, "motor_extendo");
+
         motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motor.setDirection(DcMotorSimple.Direction.REVERSE);
         controller.reset();
+
+        controller.setSetPoint(0);
     }
 
     public void update() {
@@ -33,11 +38,15 @@ public class ExtendoModule {
     }
 
     public void extinde() {
-        controller.setSetPoint(2000);
+        controller.setSetPoint(2500);
     }
+    public void putin() {controller.setSetPoint(900);}
+
+    public void mediu() {controller.setSetPoint(1225);}
+    public void mai_mediu() {controller.setSetPoint(1800);}
 
     public void acasa() {
-        controller.setSetPoint(0);
+        controller.setSetPoint(-20);
     }
 
 }
