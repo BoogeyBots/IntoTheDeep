@@ -25,8 +25,8 @@ public class IntakeModule {
         clapita = hardwareMap.get(Servo.class, "clapita");
         motor = hardwareMap.get(DcMotorEx.class, "motor_intake");
 
-        rotire_right.setPosition(0.25);
-        rotire_left.setPosition(0.25);
+        rotire_right.setPosition(0.32);
+        rotire_left.setPosition(0.32);
         clapita.setPosition(0.38);
 
     }
@@ -37,8 +37,8 @@ public class IntakeModule {
         clapita = hardwareMap.get(Servo.class, "clapita");
         motor = hardwareMap.get(DcMotorEx.class, "motor_intake");
 
-        rotire_right.setPosition(0.46);
-        rotire_left.setPosition(0.46);
+        rotire_right.setPosition(0.44);
+        rotire_left.setPosition(0.44);
         clapita.setPosition(0);
 
     }
@@ -56,8 +56,8 @@ public class IntakeModule {
     }
 
     public void jos() {
-        rotire_right.setPosition(0.7);
-        rotire_left.setPosition(0.7);
+        rotire_right.setPosition(0.77);
+        rotire_left.setPosition(0.77);
     }
 
     public void gasire() {
@@ -66,8 +66,8 @@ public class IntakeModule {
     }
 
     public void sus() {
-        rotire_right.setPosition(0.25);
-        rotire_left.setPosition(0.25);
+        rotire_right.setPosition(0.32);
+        rotire_left.setPosition(0.32);
     }
 
     public void close() {
@@ -76,5 +76,9 @@ public class IntakeModule {
 
     public void open() {
         clapita.setPosition(0);
+    }
+    public void jos_specimene() {
+        rotire_right.setPosition(0.44);
+        rotire_left.setPosition(0.44);
     }
 }

@@ -27,8 +27,8 @@ import org.firstinspires.ftc.teamcode.pedroPathing.constants.LConstants;
 import org.opencv.core.Mat;
 
 @Config
-@Autonomous (name = "Misule, vezi că ăsta e de basket")
-public class Auto_nou_basket extends OpMode {
+@Autonomous (name = "aaa")
+public class Auto_nou2_basket extends OpMode {
     ExtendoModule extendo;
     IntakeModule intake;
     GlisiereModule glisiere;
@@ -42,16 +42,17 @@ public class Auto_nou_basket extends OpMode {
     public static double timer1 = 1.2, timer2 = 0.5, timer3 = 1.5, timer4 = 8.2;
 
     public static double x_startPose = 8.936, y_startPose = 115, heading_startPose = 3.14;
-    public static double x_preload = 24.5, y_preload = 123, heading_preload = 135;
+    public static double x_preload = 24, y_preload = 121, heading_preload = 135;
     public static double x_colectare1 = 25, y_colectare1 = 122, heading_colectare1 = 180;
     public static double x_colectare2 = 26, y_colectare2 = 132, heading_colectare2 = 180;
-    public static double h1 = 234;
+    public static double h1 = 229;
 
     Pose startPose = new Pose(x_startPose, y_startPose, heading_startPose);
     Pose preload = new Pose(x_preload + 1.5, y_preload + 0.5, heading_preload);
     Pose preload2 = new Pose(x_preload + 1, y_preload, heading_preload);
     Pose colectare1 = new Pose(x_colectare1, y_colectare1, heading_colectare1);
     Pose colectare2 = new Pose(x_colectare2, y_colectare2, heading_colectare2);
+    Pose preload3 = new Pose(x_preload + 2, y_preload, heading_preload);
 
 
     private Path scorePreload, rotire;
@@ -59,6 +60,8 @@ public class Auto_nou_basket extends OpMode {
     public void buildPaths() {
         scorePreload = new Path(new BezierLine(new Point(startPose), new Point(preload2)));
         scorePreload.setConstantHeadingInterpolation(Math.toRadians(heading_preload));
+
+        //follower.setStartingPose(new Pose(startPose.getX(), startPose.getY(), startPose.getHeading()));
 
         move1 = follower.pathBuilder()
                 .addPath(new BezierLine(new Point(preload2), new Point(colectare1)))
@@ -89,6 +92,7 @@ public class Auto_nou_basket extends OpMode {
                 .addPath(new BezierPoint(new Point(preload2)))
                 .setConstantHeadingInterpolation(Math.toRadians(135))
                 .build();
+
     }
 
     public void autonomousPathUpdate() {
@@ -130,15 +134,15 @@ public class Auto_nou_basket extends OpMode {
                 break;
 
             case 3:
-                if(pathTimer.getElapsedTimeSeconds() > 1.4) { //09.9
+                if(pathTimer.getElapsedTimeSeconds() > 0.9) {
                     extendo.mai_mediu();
                 }
 
-                if(pathTimer.getElapsedTimeSeconds() > 1.7) {
+                if(pathTimer.getElapsedTimeSeconds() > 1.2) {
                     intake.jos();
                 }
 
-                if(pathTimer.getElapsedTimeSeconds() > 1.7) {
+                if(pathTimer.getElapsedTimeSeconds() > 1.2) {
                     intake.trage(1);
                     setPathState(4);
                 }
@@ -172,15 +176,18 @@ public class Auto_nou_basket extends OpMode {
                 }
 
                 if(pathTimer.getElapsedTimeSeconds() > 0.95) {
-                    brat.basket();
                     glisiere.basket();
                 }
 
-                if(pathTimer.getElapsedTimeSeconds() > 2.65) {
+                if(pathTimer.getElapsedTimeSeconds() > 2) {
+                    brat.basket();
+                }
+
+                if(pathTimer.getElapsedTimeSeconds() > 2.85) {
                     brat.open();
                 }
 
-                if(pathTimer.getElapsedTimeSeconds() > 3.1) {
+                if(pathTimer.getElapsedTimeSeconds() > 3.3) {
                     acasa();
                     setPathState(7);
                 }
@@ -197,15 +204,15 @@ public class Auto_nou_basket extends OpMode {
 
             case 8:
 
-                if(pathTimer.getElapsedTimeSeconds() > 1.8) { //1.3
+                if(pathTimer.getElapsedTimeSeconds() > 1.3) {
                     extendo.mai_mediu();
                 }
 
-                if(pathTimer.getElapsedTimeSeconds() > 2.1) {
+                if(pathTimer.getElapsedTimeSeconds() > 1.6) {
                     intake.jos();
                 }
 
-                if(pathTimer.getElapsedTimeSeconds() > 2.1) {
+                if(pathTimer.getElapsedTimeSeconds() > 1.6) {
                     intake.trage(1);
                     setPathState(9);
                 }
@@ -239,15 +246,18 @@ public class Auto_nou_basket extends OpMode {
                 }
 
                 if(pathTimer.getElapsedTimeSeconds() > 0.95) {
-                    brat.basket();
                     glisiere.basket();
                 }
 
-                if(pathTimer.getElapsedTimeSeconds() > 2.65) {
+                if(pathTimer.getElapsedTimeSeconds() > 2) {
+                    brat.basket();
+                }
+
+                if(pathTimer.getElapsedTimeSeconds() > 2.85) {
                     brat.open();
                 }
 
-                if(pathTimer.getElapsedTimeSeconds() > 2.95) {
+                if(pathTimer.getElapsedTimeSeconds() > 3.2) {
                     acasa();
                     setPathState(12);
                 }
@@ -264,7 +274,7 @@ public class Auto_nou_basket extends OpMode {
 
             case 13:
 
-                if(pathTimer.getElapsedTimeSeconds() > 0.9) { //0.9
+                if(pathTimer.getElapsedTimeSeconds() > 0.9) {
                     extendo.extinde();
                 }
 
@@ -306,15 +316,18 @@ public class Auto_nou_basket extends OpMode {
                 }
 
                 if(pathTimer.getElapsedTimeSeconds() > 0.95) {
-                    brat.basket();
                     glisiere.basket();
                 }
 
-                if(pathTimer.getElapsedTimeSeconds() > 2.65) {
+                if(pathTimer.getElapsedTimeSeconds() > 2) {
+                    brat.basket();
+                }
+
+                if(pathTimer.getElapsedTimeSeconds() > 3) {
                     brat.open();
                 }
 
-                if(pathTimer.getElapsedTimeSeconds() > 2.95) {
+                if(pathTimer.getElapsedTimeSeconds() > 3.6) {
                     acasa();
                     setPathState(17);
                 }

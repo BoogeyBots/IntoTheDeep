@@ -11,7 +11,7 @@ public class BratModule {
     }
     Servo servoST, servoDR;
     Servo servo_gheara, rotire_gheara;
-    public static double poz_brat, poz_rotire;
+    public static double poz_brat, poz_rotire, poz_gheara;
 
     public void init() {
         servoDR = hardwareMap.get(Servo.class, "servoDR");
@@ -49,12 +49,13 @@ public class BratModule {
     }
 
     public void close() {
-        servo_gheara.setPosition(0.5);
+        servo_gheara.setPosition(0.45);
     }
 
     public void rotire() {
         rotire_gheara.setPosition(poz_rotire);
     }
+    public void gheara() {servo_gheara.setPosition(poz_gheara);}
 
     public void colectare() {
         servoDR.setPosition(0.14); //0.28

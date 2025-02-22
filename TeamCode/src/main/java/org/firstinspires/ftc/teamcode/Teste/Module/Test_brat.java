@@ -20,14 +20,14 @@ public class Test_brat extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         BratModule brat = new BratModule(hardwareMap);
         IntakeModule intake = new IntakeModule(hardwareMap);
-        GlisiereModule glisiere = new GlisiereModule(hardwareMap);
+        //GlisiereModule glisiere = new GlisiereModule(hardwareMap);
         Servo servo = hardwareMap.get(Servo.class, "rotire_gheara");
 
         ElapsedTime timp = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
 
         brat.init();
         intake.init();
-        glisiere.init();
+        //glisiere.init();
         servo.setPosition(0);
 
         boolean inchis = false;
@@ -83,7 +83,7 @@ public class Test_brat extends LinearOpMode {
             }
 
             if (gamepad1.y) {
-                glisiere.poz_custom(target);
+                brat.gheara();
             }
             if (gamepad1.x) {
                 servo.setPosition(poz);
@@ -91,7 +91,6 @@ public class Test_brat extends LinearOpMode {
 
 
             telemetry.update();
-            glisiere.update();
 
         }
 

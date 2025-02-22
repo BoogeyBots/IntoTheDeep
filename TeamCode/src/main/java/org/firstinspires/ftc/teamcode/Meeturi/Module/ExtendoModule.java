@@ -49,5 +49,6 @@ public class ExtendoModule {
         controller.setSetPoint(-25);
     }
     public void nu_mai_vrea() {controller.setSetPoint(-80);}
+    public void poz_custom(double poz) {controller.setSetPoint(poz);}
 
 }

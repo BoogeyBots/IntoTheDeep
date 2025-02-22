@@ -1,24 +1,22 @@
-package org.firstinspires.ftc.teamcode.Teste;
+package org.firstinspires.ftc.teamcode.Teste.Module;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DistanceSensor;
-
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import com.qualcomm.robotcore.hardware.Servo;
 @TeleOp
-public class Test_intakeNicunebun extends LinearOpMode {
+public class Test_intake_dezasamblat extends LinearOpMode {
     DcMotorEx motor;
-    DistanceSensor sensor;
+    Servo servo;
     @Override
     public void runOpMode() throws InterruptedException {
         motor = hardwareMap.get(DcMotorEx.class, "motor_intake");
-        sensor = hardwareMap.get(DistanceSensor.class, "sensor");
+        servo = hardwareMap.get(Servo.class, "clapita");
 
         waitForStart();
 
         while (opModeIsActive()) {
-            if(gamepad1.right_trigger > 0.1 && sensor.getDistance(DistanceUnit.CM) > 4) {
+            if(gamepad1.right_trigger > 0.1) {
                 motor.setPower(gamepad1.right_trigger);
             }
 
@@ -26,12 +24,15 @@ public class Test_intakeNicunebun extends LinearOpMode {
                 motor.setPower(-gamepad1.left_trigger);
             }
 
-            else {
-                motor.setPower(0);
+            else motor.setPower(0);
+
+            if(gamepad1.a) {
+                servo.setPosition(0);
             }
 
-
+            if(gamepad1.b) {
+                servo.setPosition(0.392);
+            }
         }
-
     }
 }
