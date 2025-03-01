@@ -1,75 +1,91 @@
-package org.firstinspires.ftc.teamcode.Teste.Module;
-
-
-import static java.lang.Math.abs;
+package org.firstinspires.ftc.teamcode.Nationala.Teste.Sisteme;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.arcrobotics.ftclib.controller.PIDController;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
+
+import org.firstinspires.ftc.teamcode.Nationala.Module.GearShifterModule;
+
 @Config
-@TeleOp (name = "Extendo")
-public class PID_extendo extends LinearOpMode {
-    public DcMotorEx motor;
+@TeleOp (name = "Tunare PID glisiere")
+public class PID_glisiere extends LinearOpMode{
+    public DcMotorEx motorST_ENC, motorDR;
+    public Servo servoDR, servoST;
     int poz_min = 0;
     int poz_max = 2000;
-    public static double kp = 0, ki = 0, kd = 0;
+
+    public static double p = 0, i = 0, d = 0;
+
     public static int target = 0;
-    private Servo rotire_left, rotire_right;
     int modifier = 10;
-    PIDController controller = new PIDController(kp, ki, kd);
+    PIDController controller = new PIDController(p, i, d);
     FtcDashboard dashboard;
     @Override
     public void runOpMode() throws InterruptedException {
+        GearShifterModule gear = new GearShifterModule(hardwareMap);
+
+        gear.init();
 
         dashboard = FtcDashboard.getInstance();
         telemetry = dashboard.getTelemetry();
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
-        motor = hardwareMap.get(DcMotorEx.class, "motor_extendo");
+        motorST_ENC = hardwareMap.get(DcMotorEx.class, "motorST");
+        motorDR = hardwareMap.get(DcMotorEx.class, "motorDR");
+        servoDR = hardwareMap.get(Servo.class, "servoDR");
+        servoST = hardwareMap.get(Servo.class, "servoST");
 
-        rotire_right = hardwareMap.get(Servo.class, "rotire_right");
-        rotire_left = hardwareMap.get(Servo.class, "rotire_left");
+        motorDR.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        rotire_right.setPosition(0.12);
-        rotire_left.setPosition(0.12);
+        motorST_ENC.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorDR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-        motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
+        motorST_ENC.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorDR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         controller.reset();
+
+        servoDR.setPosition(0.2);
+        servoST.setPosition(0.2);
 
         waitForStart();
 
         while (opModeIsActive()) {
             update();
+
             if (gamepad1.a) {
                 controller.setSetPoint(600);
             }
 
             if(gamepad1.b) {
-                controller.setSetPoint(2000);
+                controller.setSetPoint(target);
             }
 
             else {
                 controller.setSetPoint(controller.getSetPoint());
             }
 
+            if(gamepad1.dpad_up) {
+                gear.speed();
+            }
+
+            if(gamepad1.dpad_down) {
+                gear.torque();
+            }
+
 
 
             dashboard.updateConfig();
             telemetry.addData("A AJUNS?", controller.atSetPoint());
-            telemetry.addData("Pozitia ST: ", motor.getCurrentPosition());
-            //telemetry.addData("Pozitie DR: ", motorDR.getCurrentPosition());
+            telemetry.addData("Pozitia ST: ", motorST_ENC.getCurrentPosition());
+            telemetry.addData("Pozitie DR: ", motorDR.getCurrentPosition());
             telemetry.addData("Controller pozition: ", controller.getSetPoint());
             telemetry.addData("Pozitia care trb atinsa", controller.getSetPoint());
             //telemetry.addData("Eroare Pozitie", controller.getPositionError());
@@ -78,12 +94,14 @@ public class PID_extendo extends LinearOpMode {
     }
 
     public void update() {
-        controller.setPID(kp, ki, kd);
-        if (!controller.atSetPoint() || controller.getSetPoint() != motor.getCurrentPosition()) {
+        controller.setPID(p, i, d);
+        if (!controller.atSetPoint() || controller.getSetPoint() != motorDR.getCurrentPosition()) {
             double output = controller.calculate(
-                    motor.getCurrentPosition()
+                    motorDR.getCurrentPosition()
             );
-            motor.setVelocity(output);
+
+            motorST_ENC.setVelocity(output);
+            motorDR.setVelocity(output);
         }
     }
 }

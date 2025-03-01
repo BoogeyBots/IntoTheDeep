@@ -1,12 +1,11 @@
-package org.firstinspires.ftc.teamcode.Teste.Module;
+package org.firstinspires.ftc.teamcode.Nationala.Teste.Sisteme;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.hardware.TouchSensor;
 
-import org.firstinspires.ftc.teamcode.Meeturi.Module.IntakeModule;
+import org.firstinspires.ftc.teamcode.Nationala.Module.IntakeModule;
+
 @Config
 @TeleOp
 public class Test_intake extends LinearOpMode {
@@ -19,6 +18,7 @@ public class Test_intake extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
+
             if(gamepad1.right_trigger > 0.001) {
                 intake.trage(gamepad1.right_trigger);
             }
@@ -50,8 +50,7 @@ public class Test_intake extends LinearOpMode {
             if(gamepad1.dpad_down) {
                 intake.close();
             }
-            //telemetry.addData("Sensor: ", sensor.isPressed());
-            //telemetry.addData("Poz:", servo.getPosition());
+
             telemetry.addData("Power:", gamepad1.right_trigger * 0.7);
             telemetry.update();
 

@@ -1,9 +1,13 @@
-package org.firstinspires.ftc.teamcode.Teste.Module;
+package org.firstinspires.ftc.teamcode.Nationala.Teste.Sisteme;
+
+
+import static java.lang.Math.abs;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.arcrobotics.ftclib.controller.PIDController;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -11,18 +15,16 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 @Config
-@TeleOp (name = "Tunare PID glisiere")
-public class PID_glisiere extends LinearOpMode{
-    public DcMotorEx motorST_ENC, motorDR;
-    public Servo servoDR, servoST;
+@TeleOp (name = "Extendo")
+public class PID_extendo extends LinearOpMode {
+    public DcMotorEx motor;
     int poz_min = 0;
     int poz_max = 2000;
-    
-    public static double p = 0, i = 0, d = 0;
-
+    public static double kp = 0, ki = 0, kd = 0;
     public static int target = 0;
+    private Servo rotire_left, rotire_right;
     int modifier = 10;
-    PIDController controller = new PIDController(p, i, d);
+    PIDController controller = new PIDController(kp, ki, kd);
     FtcDashboard dashboard;
     @Override
     public void runOpMode() throws InterruptedException {
@@ -31,34 +33,36 @@ public class PID_glisiere extends LinearOpMode{
         telemetry = dashboard.getTelemetry();
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
-        motorST_ENC = hardwareMap.get(DcMotorEx.class, "motorST_ENC");
-        motorDR = hardwareMap.get(DcMotorEx.class, "motorDR");
-        servoDR = hardwareMap.get(Servo.class, "servoDR");
-        servoST = hardwareMap.get(Servo.class, "servoST");
+        motor = hardwareMap.get(DcMotorEx.class, "motor_extendo");
 
-        motorDR.setDirection(DcMotorSimple.Direction.REVERSE);
+        rotire_right = hardwareMap.get(Servo.class, "rotire_right");
+        rotire_left = hardwareMap.get(Servo.class, "rotire_left");
 
-        motorST_ENC.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorDR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rotire_right.setPosition(0.03);
+        rotire_left.setPosition(0.03);
 
-        motorST_ENC.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        motorDR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        motor.setDirection(DcMotorSimple.Direction.REVERSE);
+
 
         controller.reset();
-
-        servoDR.setPosition(0.4);
-        servoST.setPosition(0.4);
 
         waitForStart();
 
         while (opModeIsActive()) {
             update();
-
             if (gamepad1.a) {
-                controller.setSetPoint(600);
+                controller.setSetPoint(200);
             }
 
             if(gamepad1.b) {
+                controller.setSetPoint(600);
+            }
+
+            if(gamepad1.triangle) {
                 controller.setSetPoint(target);
             }
 
@@ -70,8 +74,8 @@ public class PID_glisiere extends LinearOpMode{
 
             dashboard.updateConfig();
             telemetry.addData("A AJUNS?", controller.atSetPoint());
-            telemetry.addData("Pozitia ST: ", motorST_ENC.getCurrentPosition());
-            telemetry.addData("Pozitie DR: ", motorDR.getCurrentPosition());
+            telemetry.addData("Pozitia ST: ", motor.getCurrentPosition());
+            //telemetry.addData("Pozitie DR: ", motorDR.getCurrentPosition());
             telemetry.addData("Controller pozition: ", controller.getSetPoint());
             telemetry.addData("Pozitia care trb atinsa", controller.getSetPoint());
             //telemetry.addData("Eroare Pozitie", controller.getPositionError());
@@ -80,14 +84,12 @@ public class PID_glisiere extends LinearOpMode{
     }
 
     public void update() {
-        controller.setPID(p, i, d);
-        if (!controller.atSetPoint() || controller.getSetPoint() != motorST_ENC.getCurrentPosition()) {
+        controller.setPID(kp, ki, kd);
+        if (!controller.atSetPoint() || controller.getSetPoint() != motor.getCurrentPosition()) {
             double output = controller.calculate(
-                    motorST_ENC.getCurrentPosition()
+                    motor.getCurrentPosition()
             );
-
-            motorST_ENC.setVelocity(output);
-            motorDR.setVelocity(output);
+            motor.setVelocity(output);
         }
     }
 }

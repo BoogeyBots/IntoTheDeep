@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Meeturi.Module;
+package org.firstinspires.ftc.teamcode.Nationala.Module;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -14,9 +14,6 @@ public class IntakeModule {
     Servo rotire_left, rotire_right, clapita;
     DcMotorEx motor;
 
-    //public static double power;
-    /* calpita sus 0*/
-    /*clapita jos 0.38*/
     public static double poz = 0;
 
     public void init() {
@@ -25,8 +22,8 @@ public class IntakeModule {
         clapita = hardwareMap.get(Servo.class, "clapita");
         motor = hardwareMap.get(DcMotorEx.class, "motor_intake");
 
-        rotire_right.setPosition(0.32);
-        rotire_left.setPosition(0.32);
+        rotire_right.setPosition(0.03);
+        rotire_left.setPosition(0.03);
         clapita.setPosition(0.38);
 
     }
@@ -37,8 +34,8 @@ public class IntakeModule {
         clapita = hardwareMap.get(Servo.class, "clapita");
         motor = hardwareMap.get(DcMotorEx.class, "motor_intake");
 
-        rotire_right.setPosition(0.44);
-        rotire_left.setPosition(0.44);
+        rotire_right.setPosition(0.03);
+        rotire_left.setPosition(0.03);
         clapita.setPosition(0);
 
     }
@@ -56,8 +53,8 @@ public class IntakeModule {
     }
 
     public void jos() {
-        rotire_right.setPosition(0.77);
-        rotire_left.setPosition(0.77);
+        rotire_right.setPosition(0.39);
+        rotire_left.setPosition(0.39);
     }
 
     public void gasire() {
@@ -66,19 +63,15 @@ public class IntakeModule {
     }
 
     public void sus() {
-        rotire_right.setPosition(0.32);
-        rotire_left.setPosition(0.32);
+        rotire_right.setPosition(0.03);
+        rotire_left.setPosition(0.03);
     }
 
     public void close() {
         clapita.setPosition(0.392);
-    }
+    } //0.392
 
     public void open() {
         clapita.setPosition(0);
-    }
-    public void jos_specimene() {
-        rotire_right.setPosition(0.44);
-        rotire_left.setPosition(0.44);
     }
 }
