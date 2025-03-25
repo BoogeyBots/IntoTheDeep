@@ -44,7 +44,7 @@ public class Test_intake extends LinearOpMode {
             }
 
             if(gamepad1.dpad_up) {
-                intake.open();
+                intake.clapita();
             }
 
             if(gamepad1.dpad_down) {

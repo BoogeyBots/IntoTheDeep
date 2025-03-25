@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.Nationala.Module.ExtendoModule;
 import org.firstinspires.ftc.teamcode.pedroPathing.constants.FConstants;
 import org.firstinspires.ftc.teamcode.pedroPathing.constants.LConstants;
 
@@ -35,7 +36,7 @@ import com.pedropathing.pathgen.Point;
 public class StraightBackAndForth extends OpMode {
     private Telemetry telemetryA;
 
-    public static double DISTANCE = 40;
+    public static double DISTANCE = 60;
 
     private boolean forward = true;
 
@@ -43,6 +44,7 @@ public class StraightBackAndForth extends OpMode {
 
     private Path forwards;
     private Path backwards;
+    ExtendoModule extendo;
     //ExtendoModule extendoModule = new ExtendoModule(hardwareMap);
 
 
@@ -55,10 +57,13 @@ public class StraightBackAndForth extends OpMode {
         Constants.setConstants(FConstants.class, LConstants.class);
         follower = new Follower(hardwareMap);
 
+        extendo = new ExtendoModule(hardwareMap);
         forwards = new Path(new BezierLine(new Point(0,0, Point.CARTESIAN), new Point(DISTANCE,0, Point.CARTESIAN)));
         forwards.setConstantHeadingInterpolation(0);
         backwards = new Path(new BezierLine(new Point(DISTANCE,0, Point.CARTESIAN), new Point(0,0, Point.CARTESIAN)));
         backwards.setConstantHeadingInterpolation(0);
+
+        extendo.init();
 
         follower.followPath(forwards);
 
@@ -89,5 +94,7 @@ public class StraightBackAndForth extends OpMode {
 
         telemetryA.addData("going forward", forward);
         follower.telemetryDebug(telemetryA);
+
+        extendo.update();
     }
 }

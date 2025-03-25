@@ -28,6 +28,16 @@ public class ExtendoModule {
         controller.setSetPoint(0);
     }
 
+    public void init_teleOP() {
+        motor = hardwareMap.get(DcMotorEx.class, "motor_extendo");
+
+        motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        motor.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        controller.setSetPoint(-2);
+    }
+
     public void update() {
         controller.setPID(kp, ki, kd);
         if (!controller.atSetPoint() || controller.getSetPoint() != motor.getCurrentPosition()) {
@@ -57,6 +67,10 @@ public class ExtendoModule {
     }
     public void acasa() {
         controller.setSetPoint(0);
+    }
+
+    public double poz() {
+        return controller.getSetPoint();
     }
 
 }

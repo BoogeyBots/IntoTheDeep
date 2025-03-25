@@ -15,8 +15,8 @@ public class GearShifterModule {
         gear_right = hardwareMap.get(Servo.class, "gear_right");
         gear_left = hardwareMap.get(Servo.class, "gear_left");
 
-        gear_right.setPosition(0.27);
-        gear_left.setPosition(0.27);
+        gear_right.setPosition(0.29);
+        gear_left.setPosition(0.29);
     }
 
     public void torque() {
@@ -25,8 +25,8 @@ public class GearShifterModule {
     }
 
     public void speed() {
-        gear_right.setPosition(0.27);
-        gear_left.setPosition(0.27);
+        gear_right.setPosition(0.29);
+        gear_left.setPosition(0.29);
     }
 
 }

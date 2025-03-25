@@ -4,8 +4,10 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.Nationala.Module.BratModule;
 import org.firstinspires.ftc.teamcode.Nationala.Module.ExtendoModule;
 import org.firstinspires.ftc.teamcode.Nationala.Module.GearShifterModule;
@@ -14,6 +16,8 @@ import org.firstinspires.ftc.teamcode.Nationala.Module.IntakeModule;
 import org.firstinspires.ftc.teamcode.RoadRunner.drive.SampleMecanumDrive;
 @TeleOp
 public class TeleOP extends LinearOpMode {
+    DistanceSensor sensor;
+    int poz = -20;
     @Override
     public void runOpMode() throws InterruptedException {
         GlisiereModule glisiere = new GlisiereModule(hardwareMap);
@@ -23,20 +27,29 @@ public class TeleOP extends LinearOpMode {
         IntakeModule intake = new IntakeModule(hardwareMap);
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
-        drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        drive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-        glisiere.init();
+        glisiere.init_teleOP();
         gearShiter.init();
-        extendo.init();
+        extendo.init_teleOP();
         brat.init();
         intake.init();
 
+        sensor = hardwareMap.get(DistanceSensor.class, "sensor");
+
+        drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        drive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
         ElapsedTime gheara = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
         ElapsedTime gear = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
+        ElapsedTime EndGame = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
+        ElapsedTime timer_specimene = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
 
         boolean inchis = false;
         boolean bool_gear = false;
+        boolean specimene = false;
+        boolean specimene2 = false;
+        boolean sample = false;
+
+        int state = 1;
 
 
         waitForStart();
@@ -51,19 +64,26 @@ public class TeleOP extends LinearOpMode {
             );
 
             drive.update();
+
             gheara.startTime();
             gear.startTime();
+            EndGame.startTime();
+            timer_specimene.startTime();
 
             if(gamepad1.right_bumper) {
                 brat.close();
                 intake.open();
                 gheara.reset();
                 inchis = true;
+                poz = glisiere.encoder_DR() - 5;
+                if(poz > -5) {
+                    poz = -30;
+                }
             }
 
-            if (inchis && gheara.seconds() > 0.15) {
-                brat.basket();
-                glisiere.basket();
+            if (inchis && gheara.seconds() > 0.25) {
+                brat.basketup();
+                glisiere.up2();
                 inchis = false;
             }
 
@@ -77,7 +97,9 @@ public class TeleOP extends LinearOpMode {
 
             if (gamepad1.left_bumper) {
                 brat.colectare();
-                glisiere.goDown();
+                glisiere.goDown(poz);
+                sample = false;
+                //glisiere.goDown(0);
                 intake.close();
             }
 
@@ -94,7 +116,7 @@ public class TeleOP extends LinearOpMode {
             }
 
             else if (gamepad2.left_trigger > 0.01) {
-                intake.scuipa(gamepad2.left_trigger);
+                intake.scuipa(gamepad2.left_trigger * 0.7);
             }
 
             else {
@@ -126,24 +148,112 @@ public class TeleOP extends LinearOpMode {
             if (gamepad2.dpad_down) {
                 extendo.high();
             }
+            
 
-            if(gamepad1.dpad_up) {
-                glisiere.up();
-            }
-
-            if(gamepad2.x) {
-                glisiere.goDown();
+            if(gamepad2.x && EndGame.seconds() > 100) {
+                gearShiter.torque();
                 gear.reset();
                 bool_gear = true;
             }
 
-            if(bool_gear && gear.seconds() > 1) {
-                gearShiter.torque();
+            if(gear.seconds() > 3.5 && bool_gear) {
+                gamepad1.rumble(400);
+                gamepad2.rumble(400);
+                bool_gear = false;
             }
 
             if(gamepad2.y) {
                 glisiere.hang();
             }
+
+            if(gamepad1.square) {
+                brat.colectare_specimene();
+            }
+
+            if(gamepad1.triangle && state == 1) {
+                timer_specimene.reset();
+                glisiere.specimene();
+                brat.specimene();
+                specimene2 = true;
+            }
+
+            if(timer_specimene.seconds() > 2 && specimene2) {
+                state = 2;
+                specimene2 = false;
+            }
+
+            if(gamepad1.triangle && state == 2) {
+                glisiere.goDown(0);
+                timer_specimene.reset();
+                specimene = true;
+            }
+
+            if(specimene && timer_specimene.seconds() > 0.15) {
+                brat.open();
+                specimene = false;
+                state = 1;
+            }
+
+            if(gamepad1.dpad_up) {
+                brat.basket_nasol();
+            }
+
+            if(gamepad1.dpad_down) {
+                glisiere.goDown(1000);
+            }
+
+            if(gamepad1.dpad_left) {
+                glisiere.specimene_mutare();
+            }
+
+            if(gamepad1.dpad_right) {
+                glisiere.specimene();
+            }
+
+            if(sensor.getDistance(DistanceUnit.CM) < 1 && !sample) {
+                gamepad1.rumble(500);
+                gamepad2.rumble(500);
+                sample = true;
+            }
+
+            /*if(sensor.getDistance(DistanceUnit.CM) < 0.8 && extendo.poz() <= 0 && transfer.seconds() > 0.4) {
+                intake.stop();
+                brat.close();
+                intake.open();
+                gheara.reset();
+                inchis = true;
+                poz = glisiere.encoder_DR() - 5;
+                if(poz > -3) {
+                    if(EndGame.seconds() < 60) {
+                        poz = -35;
+                    }
+
+                    else if(EndGame.seconds() < 90) {
+                        poz = - 45;
+                    }
+
+                    else {
+                        poz = -55;
+                    }
+                }
+            }
+
+             */
+
+
+            telemetry.addData("Distance:", sensor.getDistance(DistanceUnit.CM));
+            telemetry.addData("MotorDR: ", glisiere.encoder_DR());
+            telemetry.addData("MotorST: ", glisiere.encoder_ST());
+            telemetry.addData("Poz:", poz);
+            telemetry.addLine("------------");
+            telemetry.addData("State: ", state);
+            telemetry.addData("Timer specimene: ", timer_specimene.seconds());
+            telemetry.addLine("------------");
+            telemetry.addData("Sample: ", sample);
+            telemetry.addData("Distance: ", sensor.getDistance(DistanceUnit.CM));
+            telemetry.update();
+
+
 
             extendo.update();
             glisiere.update();

@@ -21,11 +21,11 @@ public class BratModule {
         rotire_gheara = hardwareMap.get(Servo.class, "rotire_gheara");
         miscare_gheara = hardwareMap.get(Servo.class, "miscare_gheara");
 
-        servoDR.setPosition(0.08);
-        servoST.setPosition(0.08);
-        miscare_gheara.setPosition(0.2);
-        rotire_gheara.setPosition(0.05);
-        servo_gheara.setPosition(0.7);
+        servoDR.setPosition(0.175);
+        servoST.setPosition(0.175);
+        miscare_gheara.setPosition(0.39);
+        rotire_gheara.setPosition(0.155);
+        servo_gheara.setPosition(0.67);
     }
 
     public void init_auto() {
@@ -36,11 +36,26 @@ public class BratModule {
         rotire_gheara = hardwareMap.get(Servo.class, "rotire_gheara");
         miscare_gheara = hardwareMap.get(Servo.class, "miscare_gheara");
 
-        servoDR.setPosition(0.0805);
-        servoST.setPosition(0.0805);
-        miscare_gheara.setPosition(0.2);
-        rotire_gheara.setPosition(0.05);
-        servo_gheara.setPosition(0.4);
+        servoDR.setPosition(0.175);
+        servoST.setPosition(0.175);
+        miscare_gheara.setPosition(0.39);
+        rotire_gheara.setPosition(0.155);
+        servo_gheara.setPosition(0.33);
+    }
+
+    public void init_specimene() {
+        servoDR = hardwareMap.get(Servo.class, "servoDR");
+        servoST = hardwareMap.get(Servo.class, "servoST");
+
+        servo_gheara = hardwareMap.get(Servo.class, "servo_gheara");
+        rotire_gheara = hardwareMap.get(Servo.class, "rotire_gheara");
+        miscare_gheara = hardwareMap.get(Servo.class, "miscare_gheara");
+
+        servoDR.setPosition(0.13);
+        servoST.setPosition(0.13);
+        miscare_gheara.setPosition(0.075);
+        rotire_gheara.setPosition(0.815);
+        servo_gheara.setPosition(0.34);
     }
 
     public void brat() {
@@ -49,26 +64,69 @@ public class BratModule {
     }
 
     public void colectare() {
-        servoDR.setPosition(0.0805);
-        servoST.setPosition(0.0805);
-        miscare_gheara.setPosition(0.2);
-        rotire_gheara.setPosition(0.05);
+        servoDR.setPosition(0.17);
+        servoST.setPosition(0.17);
+        miscare_gheara.setPosition(0.36); //0.025
+        rotire_gheara.setPosition(0.155);
         servo_gheara.setPosition(0.7);
     }
 
     public void basket() {
-        servoDR.setPosition(0.45);
-        servoST.setPosition(0.45);
-        miscare_gheara.setPosition(0.55);
-        rotire_gheara.setPosition(0.05);
+        servoDR.setPosition(0.57);
+        servoST.setPosition(0.57);
+        miscare_gheara.setPosition(0.075);
+        rotire_gheara.setPosition(0.155);
+    }
+
+    public void colectare_specimene() {
+        servoDR.setPosition(0.93);
+        servoST.setPosition(0.93);
+        miscare_gheara.setPosition(0.25);
+        rotire_gheara.setPosition(0.155);
+    }
+
+    public void specimene() {
+        servoDR.setPosition(0.13);
+        servoST.setPosition(0.13);
+        miscare_gheara.setPosition(0.19);
+        rotire_gheara.setPosition(0.815);
+    }
+
+    public void basketup() {
+        servoDR.setPosition(0.52);
+        servoST.setPosition(0.52);
+        miscare_gheara.setPosition(0.045);
+        rotire_gheara.setPosition(0.155);
+    }
+
+    public void basket_nasol() {
+        servoDR.setPosition(0.49);
+        servoST.setPosition(0.49);
+        miscare_gheara.setPosition(0.045);
+        rotire_gheara.setPosition(0.155);
+    }
+
+    public void basket_jos() {
+        servoDR.setPosition(0.56);
+        servoST.setPosition(0.56);
+        miscare_gheara.setPosition(0.045);
+        rotire_gheara.setPosition(0.155);
+    }
+
+    public void rotire_specimene() {
+        rotire_gheara.setPosition(0.917);
+    }
+
+    public void rotire_sample() {
+        rotire_gheara.setPosition(0.13);
     }
 
     public void open() {
-        servo_gheara.setPosition(0.7);
+        servo_gheara.setPosition(0.67);
     }
 
     public void close() {
-        servo_gheara.setPosition(0.4);
+        servo_gheara.setPosition(0.34);
     }
 
     public void rotire_gheara() {

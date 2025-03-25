@@ -14,7 +14,7 @@ public class IntakeModule {
     Servo rotire_left, rotire_right, clapita;
     DcMotorEx motor;
 
-    public static double poz = 0;
+    public static double poz = 0, poz_clapita, poz_sus, poz_jos;
 
     public void init() {
         rotire_right = hardwareMap.get(Servo.class, "rotire_right");
@@ -22,9 +22,9 @@ public class IntakeModule {
         clapita = hardwareMap.get(Servo.class, "clapita");
         motor = hardwareMap.get(DcMotorEx.class, "motor_intake");
 
-        rotire_right.setPosition(0.03);
-        rotire_left.setPosition(0.03);
-        clapita.setPosition(0.38);
+        rotire_right.setPosition(0.16);
+        rotire_left.setPosition(0.16);
+        clapita.setPosition(0.4);
 
     }
 
@@ -34,11 +34,23 @@ public class IntakeModule {
         clapita = hardwareMap.get(Servo.class, "clapita");
         motor = hardwareMap.get(DcMotorEx.class, "motor_intake");
 
-        rotire_right.setPosition(0.03);
-        rotire_left.setPosition(0.03);
-        clapita.setPosition(0);
+        rotire_right.setPosition(0.19);
+        rotire_left.setPosition(0.19);
+        clapita.setPosition(0.1);
 
     }
+
+    public void init_test() {
+        rotire_right = hardwareMap.get(Servo.class, "rotire_right");
+        rotire_left = hardwareMap.get(Servo.class, "rotire_left");
+        clapita = hardwareMap.get(Servo.class, "clapita");
+        motor = hardwareMap.get(DcMotorEx.class, "motor_intake");
+
+        rotire_right.setPosition(0.19);
+        rotire_left.setPosition(0.19);
+
+    }
+
 
     public void trage(double power) {
         motor.setPower(power);
@@ -53,25 +65,38 @@ public class IntakeModule {
     }
 
     public void jos() {
-        rotire_right.setPosition(0.39);
-        rotire_left.setPosition(0.39);
+        rotire_right.setPosition(0.51);
+        rotire_left.setPosition(0.51);
     }
 
     public void gasire() {
-        rotire_right.setPosition(poz);
-        rotire_left.setPosition(poz);
+        rotire_right.setPosition(0.51);
+        rotire_left.setPosition(0.51);
     }
+
+    public void intermediar() {
+        rotire_right.setPosition(0.19);
+        rotire_left.setPosition(0.19);
+    }
+
+
 
     public void sus() {
-        rotire_right.setPosition(0.03);
-        rotire_left.setPosition(0.03);
+        rotire_right.setPosition(0.16);
+        rotire_left.setPosition(0.16);
     }
 
+
+
     public void close() {
-        clapita.setPosition(0.392);
+        clapita.setPosition(0.45);
     } //0.392
 
     public void open() {
-        clapita.setPosition(0);
+        clapita.setPosition(0.1);
+    }
+
+    public void clapita() {
+        clapita.setPosition(poz_clapita);
     }
 }

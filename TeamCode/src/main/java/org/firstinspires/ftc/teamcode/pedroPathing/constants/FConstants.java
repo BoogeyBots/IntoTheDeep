@@ -42,9 +42,9 @@ public class FConstants {
 
         //FollowerConstants.drivePIDFCoefficients = new CustomFilteredPIDFCoefficients(0.02,0,0.000001,0.4,0);
         FollowerConstants.drivePIDFCoefficients.setCoefficients(0.005, 0, 0.0009, 0.4, 0);
-        FollowerConstants.useSecondaryDrivePID = false;
+        FollowerConstants.useSecondaryDrivePID = true;
         //FollowerConstants.secondaryDrivePIDFCoefficients = new CustomFilteredPIDFCoefficients(0.01,0,0.0000005,0.4,0); // Not being used, @see useSecondaryDrivePID
-        FollowerConstants.secondaryDrivePIDFCoefficients.setCoefficients(0, 0, 0, 0, 0);
+        FollowerConstants.secondaryDrivePIDFCoefficients.setCoefficients(0.005 / 2, 0, 0.0009 / 2, 0.4, 0);
 
         FollowerConstants.zeroPowerAccelerationMultiplier = 4;
         FollowerConstants.centripetalScaling = 0.0005;

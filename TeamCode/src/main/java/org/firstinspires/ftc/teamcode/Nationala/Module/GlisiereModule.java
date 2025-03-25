@@ -45,9 +45,9 @@ public class GlisiereModule {
 
     public void update() {
         controller.setPID(kp, ki, kd);
-        if (!controller.atSetPoint() || controller.getSetPoint() != motorST_ENC.getCurrentPosition()) {
+        if (!controller.atSetPoint() || controller.getSetPoint() != motorDR.getCurrentPosition()) {
             double output = controller.calculate(
-                    motorST_ENC.getCurrentPosition()
+                    motorDR.getCurrentPosition()
             );
             motorST_ENC.setVelocity(output);
             motorDR.setVelocity(output);
@@ -58,16 +58,28 @@ public class GlisiereModule {
         controller.setSetPoint(1200);
     }
 
-    public void basket() {
+    public void up2() {
         controller.setSetPoint(1100);
     }
+    public void specimene_mutare() {
+        controller.setSetPoint(600);
+    }
 
-    public void goDown() {
-        controller.setSetPoint(-20);
+    public void goDown(int poz) {
+        controller.setSetPoint(poz);
     }
 
     public void hang() {
         controller.setSetPoint(3000);
+    }
+    public void specimene() {controller.setSetPoint(800);}
+
+    public int encoder_DR() {
+        return motorDR.getCurrentPosition();
+    }
+
+    public int encoder_ST() {
+        return motorST_ENC.getCurrentPosition();
     }
 
 
