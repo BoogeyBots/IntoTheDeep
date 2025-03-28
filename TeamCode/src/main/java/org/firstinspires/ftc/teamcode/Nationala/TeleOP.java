@@ -14,6 +14,9 @@ import org.firstinspires.ftc.teamcode.Nationala.Module.GearShifterModule;
 import org.firstinspires.ftc.teamcode.Nationala.Module.GlisiereModule;
 import org.firstinspires.ftc.teamcode.Nationala.Module.IntakeModule;
 import org.firstinspires.ftc.teamcode.RoadRunner.drive.SampleMecanumDrive;
+
+import dev.frozenmilk.sinister.loading.Pinned;
+
 @TeleOp
 public class TeleOP extends LinearOpMode {
     DistanceSensor sensor;
@@ -199,15 +202,7 @@ public class TeleOP extends LinearOpMode {
             }
 
             if(gamepad1.dpad_down) {
-                glisiere.goDown(1000);
-            }
-
-            if(gamepad1.dpad_left) {
-                glisiere.specimene_mutare();
-            }
-
-            if(gamepad1.dpad_right) {
-                glisiere.specimene();
+                brat.gheara_orizontala();
             }
 
             if(sensor.getDistance(DistanceUnit.CM) < 1 && !sample) {
