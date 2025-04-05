@@ -1,10 +1,10 @@
-package org.firstinspires.ftc.teamcode.Nationala.Teste.Sisteme;
+package org.firstinspires.ftc.teamcode.Offseason.Teste.Sisteme;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.Nationala.Module.IntakeModule;
+import org.firstinspires.ftc.teamcode.Offseason.Module.IntakeModule;
 
 @Config
 @TeleOp

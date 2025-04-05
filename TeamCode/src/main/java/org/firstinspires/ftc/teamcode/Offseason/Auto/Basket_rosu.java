@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Nationala.Auto;
+package org.firstinspires.ftc.teamcode.Offseason.Auto;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.pedropathing.follower.Follower;
@@ -20,17 +20,17 @@ import com.qualcomm.robotcore.hardware.DistanceSensor;
 
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.firstinspires.ftc.teamcode.Nationala.Module.BratModule;
-import org.firstinspires.ftc.teamcode.Nationala.Module.ExtendoModule;
-import org.firstinspires.ftc.teamcode.Nationala.Module.GearShifterModule;
-import org.firstinspires.ftc.teamcode.Nationala.Module.GlisiereModule;
-import org.firstinspires.ftc.teamcode.Nationala.Module.IntakeModule;
+import org.firstinspires.ftc.teamcode.Offseason.Module.BratModule;
+import org.firstinspires.ftc.teamcode.Offseason.Module.ExtendoModule;
+import org.firstinspires.ftc.teamcode.Offseason.Module.GearShifterModule;
+import org.firstinspires.ftc.teamcode.Offseason.Module.GlisiereModule;
+import org.firstinspires.ftc.teamcode.Offseason.Module.IntakeModule;
 import org.firstinspires.ftc.teamcode.pedroPathing.constants.FConstants;
 import org.firstinspires.ftc.teamcode.pedroPathing.constants.LConstants;
 
 @Config
-@Autonomous (name = "Basket albastru")
-public class Basket_albastru extends OpMode {
+@Autonomous (name = "Basket rosu")
+public class Basket_rosu extends OpMode {
     ExtendoModule extendo;
     IntakeModule intake;
     GlisiereModule glisiere;
@@ -49,9 +49,9 @@ public class Basket_albastru extends OpMode {
     public static double x_startPose = 8.936, y_startPose = 115, heading_startPose = 3.14;
     public static double x_preload = 15.5, y_preload = 127.2, heading_preload = 135;
     public static double x_preload2 = 15.5, y_preload2 = 127.2, heading_preload2 = 135;
-    public static double x_colectare1 = 16, y_colectare1 = 124.2, heading_colectare1 = 180;
+    public static double x_colectare1 = 16, y_colectare1 = 124.2, heading_colectare1 = 168;
     public static double x_colectare2 = 18, y_colectare2 = 132.7, heading_colectare2 = 180;
-    public static double x_colectare3 = 20, y_colectare3 = 132.7, heading_colectare3= 200;
+    public static double x_colectare3 = 20, y_colectare3 = 132.7, heading_colectare3= 207;
     public static double x_submersible = 61, y_submersible = 100, heading_submersible = 90;
     public static double x_control1 = 50, y_control1= 123;
     public static double h1 = 200;
@@ -448,10 +448,10 @@ public class Basket_albastru extends OpMode {
                  */
 
                 if(pathTimer.getElapsedTimeSeconds() > 0.01 && sensor.getDistance(DistanceUnit.CM) < 0.79) {
-                    if(colorsensor.red() >= 1000 && colorsensor.green() <= 1000)
+                    if(colorsensor.blue() >= 1300 && colorsensor.green() <= 1000 && colorsensor.red() <= 1000)
                         setPathState(21);
 
-                    else if(pathTimer.getElapsedTimeSeconds() > 0.5 && colorsensor.blue() <= 1000 && colorsensor.green() <= 1000)
+                    else if(pathTimer.getElapsedTimeSeconds() > 0.5 && colorsensor.blue() <= 1000)
                         setPathState(22);
                 }
 

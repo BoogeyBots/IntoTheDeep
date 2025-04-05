@@ -1,10 +1,10 @@
-package org.firstinspires.ftc.teamcode.Nationala.Teste;
+package org.firstinspires.ftc.teamcode.Offseason.Teste;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.Nationala.Module.BratModule;
-import org.firstinspires.ftc.teamcode.Nationala.Module.IntakeModule;
+import org.firstinspires.ftc.teamcode.Offseason.Module.BratModule;
+import org.firstinspires.ftc.teamcode.Offseason.Module.IntakeModule;
 @TeleOp(name = "Clapita zdr gen")
 public class Test_marimeclapita extends LinearOpMode {
     @Override

@@ -1,11 +1,11 @@
-package org.firstinspires.ftc.teamcode.Nationala.Teste;
+package org.firstinspires.ftc.teamcode.Offseason.Teste;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-import org.firstinspires.ftc.teamcode.Nationala.Module.GearShifterModule;
+import org.firstinspires.ftc.teamcode.Offseason.Module.GearShifterModule;
 @TeleOp
 public class Glisiere_noPID extends LinearOpMode {
     DcMotorEx motorDR, motorST;

@@ -1,12 +1,12 @@
-package org.firstinspires.ftc.teamcode.Nationala.Teste;
+package org.firstinspires.ftc.teamcode.Offseason.Teste;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.Nationala.Module.BratModule;
-import org.firstinspires.ftc.teamcode.Nationala.Module.GlisiereModule;
+import org.firstinspires.ftc.teamcode.Offseason.Module.BratModule;
+import org.firstinspires.ftc.teamcode.Offseason.Module.GlisiereModule;
 @Config
 @TeleOp
 public class Test_specimene extends LinearOpMode {

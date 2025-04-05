@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Nationala.Teste;
+package org.firstinspires.ftc.teamcode.Offseason.Teste;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -12,7 +12,7 @@ public class Test_servo extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 
-        servo = hardwareMap.get(Servo.class, "miscare_gheara");
+        servo = hardwareMap.get(Servo.class, "servo_gheara");
 
         waitForStart();
 

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Nationala.Auto;
+package org.firstinspires.ftc.teamcode.Offseason.Auto;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.pedropathing.follower.Follower;
@@ -20,17 +20,17 @@ import com.qualcomm.robotcore.hardware.DistanceSensor;
 
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.firstinspires.ftc.teamcode.Nationala.Module.BratModule;
-import org.firstinspires.ftc.teamcode.Nationala.Module.ExtendoModule;
-import org.firstinspires.ftc.teamcode.Nationala.Module.GearShifterModule;
-import org.firstinspires.ftc.teamcode.Nationala.Module.GlisiereModule;
-import org.firstinspires.ftc.teamcode.Nationala.Module.IntakeModule;
+import org.firstinspires.ftc.teamcode.Offseason.Module.BratModule;
+import org.firstinspires.ftc.teamcode.Offseason.Module.ExtendoModule;
+import org.firstinspires.ftc.teamcode.Offseason.Module.GearShifterModule;
+import org.firstinspires.ftc.teamcode.Offseason.Module.GlisiereModule;
+import org.firstinspires.ftc.teamcode.Offseason.Module.IntakeModule;
 import org.firstinspires.ftc.teamcode.pedroPathing.constants.FConstants;
 import org.firstinspires.ftc.teamcode.pedroPathing.constants.LConstants;
 
 @Config
-@Autonomous (name = "aaa")
-public class Basket extends OpMode {
+@Autonomous (name = "Basket albastru")
+public class Basket_albastru extends OpMode {
     ExtendoModule extendo;
     IntakeModule intake;
     GlisiereModule glisiere;
@@ -47,10 +47,11 @@ public class Basket extends OpMode {
     public static double timer1 = 2, timer2 = 0.1, timer3 = 0.4, timer4 = 0.28;
 
     public static double x_startPose = 8.936, y_startPose = 115, heading_startPose = 3.14;
-    public static double x_preload = 15.5, y_preload = 127, heading_preload = 135;
-    public static double x_colectare1 = 16, y_colectare1 = 124.2, heading_colectare1 = 180;
+    public static double x_preload = 15.5, y_preload = 127.2, heading_preload = 135;
+    public static double x_preload2 = 15.5, y_preload2 = 127.2, heading_preload2 = 135;
+    public static double x_colectare1 = 16, y_colectare1 = 124.2, heading_colectare1 = 168;
     public static double x_colectare2 = 18, y_colectare2 = 132.7, heading_colectare2 = 180;
-    public static double x_colectare3 = 20, y_colectare3 = 132.7, heading_colectare3= 200;
+    public static double x_colectare3 = 20, y_colectare3 = 132.7, heading_colectare3= 207;
     public static double x_submersible = 61, y_submersible = 100, heading_submersible = 90;
     public static double x_control1 = 50, y_control1= 123;
     public static double h1 = 200;
@@ -64,11 +65,12 @@ public class Basket extends OpMode {
     Pose submersible2 = new Pose(x_submersible + 18, y_submersible, heading_submersible);
     Pose control1 = new Pose(x_control1, y_control1);
     Pose control2 = new Pose(x_control1, y_control1 + 10);
-    Pose preload2 = new Pose(x_preload + 6, y_preload + 5);
+    Pose preload2 = new Pose(x_preload2, y_preload2);
+    Pose sub = new Pose(x_submersible + 18, y_submersible + 4, heading_submersible);
 
 
     private Path scorePreload, rotire;
-    private PathChain score, move1, move2, move3, move4, move5, move6, move7, move8, move8_2, move9, move10, move11, move12, move13, move14, move15, moving_submersible, moving_submersible_reverse;
+    private PathChain score, move1, move2, move3, move4, move5, move6, move7, move8, move8_2, move9, move10, move11, move12, move13, move14, move15, moving_submersible, moving_submersible_reverse, miscare_intermediara;
     public void buildPaths() {
         scorePreload = new Path(new BezierLine(new Point(startPose), new Point(preload)));
         scorePreload.setConstantHeadingInterpolation(Math.toRadians(heading_preload));
@@ -116,17 +118,22 @@ public class Basket extends OpMode {
                 .build();
 
         move8 = follower.pathBuilder()
-                .addPath(new BezierCurve(new Point(submersible), new Point(control1), new Point(preload)))
+                .addPath(new BezierCurve(new Point(submersible), new Point(control1), new Point(preload2)))
                 .setConstantHeadingInterpolation(Math.toRadians(135))
                 .build();
 
         move8_2 = follower.pathBuilder()
-                .addPath(new BezierCurve(new Point(submersible2), new Point(control2), new Point(preload)))
+                .addPath(new BezierCurve(new Point(submersible2), new Point(control2), new Point(preload2)))
                 .setConstantHeadingInterpolation(Math.toRadians(135))
                 .build();
 
         moving_submersible_reverse = follower.pathBuilder()
                 .addPath(new BezierLine(new Point(submersible2), new Point(submersible)))
+                .setConstantHeadingInterpolation(Math.toRadians(90))
+                .build();
+
+        miscare_intermediara = follower.pathBuilder()
+                .addPath(new BezierLine(new Point(submersible2), new Point(sub)))
                 .setConstantHeadingInterpolation(Math.toRadians(90))
                 .build();
 
@@ -232,8 +239,8 @@ public class Basket extends OpMode {
                 }
 
                 if(pathTimer.getElapsedTimeSeconds() > 2.55) {
-                    intake.stop();
                     acasa();
+                    intake.stop();
                     setPathState(7);
                 }
 
@@ -308,8 +315,8 @@ public class Basket extends OpMode {
                 }
 
                 if(pathTimer.getElapsedTimeSeconds() > 2.55) {
-                    intake.stop();
                     acasa();
+                    intake.stop();
                     setPathState(12);
                 }
 
@@ -384,8 +391,8 @@ public class Basket extends OpMode {
                 }
 
                 if(pathTimer.getElapsedTimeSeconds() > 2.55) {
-                    intake.stop();
                     acasa();
+                    intake.stop();
                     setPathState(17);
                 }
 
@@ -394,6 +401,7 @@ public class Basket extends OpMode {
             case 17:
                 if(pathTimer.getElapsedTimeSeconds() > 0.05) {
                     follower.followPath(move7, true);
+                    follower.setMaxPower(1);
                     setPathState(18);
                 }
 
@@ -421,50 +429,80 @@ public class Basket extends OpMode {
 
 
             case 20:
-                if(pathTimer.getElapsedTimeSeconds() > 0.0001 && sensor.getDistance(DistanceUnit.CM) < 1 && colorsensor.blue() >= 1000 && colorsensor.green() <= 1000 && colorsensor.red() <= 1000) {
+                /*if(pathTimer.getElapsedTimeSeconds() > 0.0001 && sensor.getDistance(DistanceUnit.CM) < 0.79 && colorsensor.blue() >= 1000 && colorsensor.green() <= 1000 && colorsensor.red() <= 1000) {
                     setPathState(21);
                     //impar -> caz naz
                 }
 
-                else if(pathTimer.getElapsedTimeSeconds() > 0.1 && sensor.getDistance(DistanceUnit.CM) < 1) {
+                else if(pathTimer.getElapsedTimeSeconds() > 0.7 && sensor.getDistance(DistanceUnit.CM) < 0.79) {
                     setPathState(22);
                     //par -> caz misto
+                }
+
+                else if(pathTimer.getElapsedTimeSeconds() > 4 && sensor.getDistance(DistanceUnit.CM) > 1) {
+                    intake.scuipa(1);
+                    if(pathTimer.getElapsedTimeSeconds() > 5) {
+                        setPathState(18);
+                    }
+                }
+                 */
+
+                if(pathTimer.getElapsedTimeSeconds() > 0.01 && sensor.getDistance(DistanceUnit.CM) < 0.79) {
+                    if(colorsensor.red() >= 1000 && colorsensor.green() <= 1000)
+                        setPathState(21);
+
+                    else if(pathTimer.getElapsedTimeSeconds() > 0.5 && colorsensor.blue() <= 1000 && colorsensor.green() <= 1000)
+                        setPathState(22);
+                }
+
+                else if(pathTimer.getElapsedTimeSeconds() > 4 && sensor.getDistance(DistanceUnit.CM) > 1) {
+                    intake.scuipa(1);
+                    if(pathTimer.getElapsedTimeSeconds() > 5)
+                        setPathState(69);
+                }
+
+                break;
+
+            case 69:
+                if(pathTimer.getElapsedTimeSeconds() > 0.01) {
+                    follower.followPath(miscare_intermediara);
+                    setPathState(18);
                 }
 
                 break;
 
             case 21:
-                if(pathTimer.getElapsedTimeSeconds() > 0.01) {
-                    intake.intermediar();
-                    intake.scuipa(1);
-
-                }
-
-                if(pathTimer.getElapsedTimeSeconds() > 0.5) {
+                if(pathTimer.getElapsedTimeSeconds() > 0.001) {
+                    follower.followPath(moving_submersible, true);
                     setPathState(23);
                 }
 
                 break;
 
             case 23:
-                if(pathTimer.getElapsedTimeSeconds() > 0.15) {
-                    intake.jos();
-                    intake.trage(1);
-                }
-
-                if(pathTimer.getElapsedTimeSeconds() > 0.3) {
+                if(pathTimer.getElapsedTimeSeconds() > 0.01) {
+                    intake.scuipa(1);
                     setPathState(25);
                 }
 
                 break;
 
             case 25:
-                if(pathTimer.getElapsedTimeSeconds() > 0.01) {
+                if(pathTimer.getElapsedTimeSeconds() > 0.6) {
                     follower.followPath(moving_submersible_reverse, true);
+                    setPathState(27);
+                }
+
+                break;
+
+            case 27:
+                if(pathTimer.getElapsedTimeSeconds() > 0.01) {
+                    intake.trage(1);
                     setPathState(20);
                 }
 
                 break;
+
 
             case 22:
                 if(pathTimer.getElapsedTimeSeconds() > 0.01) {
@@ -472,7 +510,7 @@ public class Basket extends OpMode {
                     intake.scuipa(1);
                 }
 
-                if(pathTimer.getElapsedTimeSeconds() > 0.15) {
+                if(pathTimer.getElapsedTimeSeconds() > 0.125) {
                     intake.trage(1);
                 }
 
@@ -483,9 +521,11 @@ public class Basket extends OpMode {
 
                 break;
 
+
             case 24:
                 if(pathTimer.getElapsedTimeSeconds() > 0.01) {
                     follower.followPath(move8_2, true);
+                    follower.setMaxPower(1);
                     setPathState(26);
                 }
 
@@ -509,22 +549,20 @@ public class Basket extends OpMode {
                     glisiere.up();
                 }
 
-                if(pathTimer.getElapsedTimeSeconds() > 1.9) {
+                if(pathTimer.getElapsedTimeSeconds() > 2.4) {
                     brat.basket();
                 }
 
-                if(pathTimer.getElapsedTimeSeconds() > 2.6) {
+                if(pathTimer.getElapsedTimeSeconds() > 3) {
                     brat.open();
                 }
 
-                if(pathTimer.getElapsedTimeSeconds() > 3) {
+                if(pathTimer.getElapsedTimeSeconds() > 3.4) {
                     acasa();
                     setPathState(17);
                 }
 
                 break;
-
-
 
         }
     }
@@ -579,12 +617,11 @@ public class Basket extends OpMode {
         follower.update();
         autonomousPathUpdate();
 
-        /*telemetry.addData("path state", pathState);
+        telemetry.addData("path state", pathState);
         telemetry.addData("x", follower.getPose().getX());
         telemetry.addData("y", follower.getPose().getY());
         telemetry.addData("heading", follower.getPose().getHeading());
 
-         */
 
         //telemetry.addData("Distance: ", sensor.getDistance(DistanceUnit.CM));
         telemetry.update();

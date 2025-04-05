@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Nationala.Module;
+package org.firstinspires.ftc.teamcode.Offseason.Module;
 
 import com.arcrobotics.ftclib.controller.PIDController;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -72,7 +72,7 @@ public class GlisiereModule {
     public void hang() {
         controller.setSetPoint(3000);
     }
-    public void specimene() {controller.setSetPoint(800);}
+    public void specimene() {controller.setSetPoint(750);}
 
     public int encoder_DR() {
         return motorDR.getCurrentPosition();

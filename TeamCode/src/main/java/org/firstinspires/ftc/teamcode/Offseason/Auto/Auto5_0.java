@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Nationala.Auto;
+package org.firstinspires.ftc.teamcode.Offseason.Auto;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.pedropathing.follower.Follower;
@@ -16,11 +16,11 @@ import com.pedropathing.util.Timer;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
-import org.firstinspires.ftc.teamcode.Nationala.Module.BratModule;
-import org.firstinspires.ftc.teamcode.Nationala.Module.ExtendoModule;
-import org.firstinspires.ftc.teamcode.Nationala.Module.GearShifterModule;
-import org.firstinspires.ftc.teamcode.Nationala.Module.GlisiereModule;
-import org.firstinspires.ftc.teamcode.Nationala.Module.IntakeModule;
+import org.firstinspires.ftc.teamcode.Offseason.Module.BratModule;
+import org.firstinspires.ftc.teamcode.Offseason.Module.ExtendoModule;
+import org.firstinspires.ftc.teamcode.Offseason.Module.GearShifterModule;
+import org.firstinspires.ftc.teamcode.Offseason.Module.GlisiereModule;
+import org.firstinspires.ftc.teamcode.Offseason.Module.IntakeModule;
 import org.firstinspires.ftc.teamcode.pedroPathing.constants.FConstants;
 import org.firstinspires.ftc.teamcode.pedroPathing.constants.LConstants;
 

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Nationala.Module;
+package org.firstinspires.ftc.teamcode.Offseason.Module;
 //0.7 deschis 0.4 inchis
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -21,11 +21,11 @@ public class BratModule {
         rotire_gheara = hardwareMap.get(Servo.class, "rotire_gheara");
         miscare_gheara = hardwareMap.get(Servo.class, "miscare_gheara");
 
-        servoDR.setPosition(0.165);
-        servoST.setPosition(0.165);
-        miscare_gheara.setPosition(0.36);
+        servoDR.setPosition(0.14);
+        servoST.setPosition(0.14);
+        miscare_gheara.setPosition(0.4);
         rotire_gheara.setPosition(0.155);
-        servo_gheara.setPosition(0.67);
+        servo_gheara.setPosition(0.35);
     }
 
     public void init_auto() {
@@ -36,11 +36,11 @@ public class BratModule {
         rotire_gheara = hardwareMap.get(Servo.class, "rotire_gheara");
         miscare_gheara = hardwareMap.get(Servo.class, "miscare_gheara");
 
-        servoDR.setPosition(0.165);
-        servoST.setPosition(0.165);
-        miscare_gheara.setPosition(0.36);
+        servoDR.setPosition(0.13);
+        servoST.setPosition(0.13);
+        miscare_gheara.setPosition(0.4);
         rotire_gheara.setPosition(0.155);
-        servo_gheara.setPosition(0.33);
+        servo_gheara.setPosition(0.67);
     }
 
     public void init_specimene() {
@@ -51,11 +51,11 @@ public class BratModule {
         rotire_gheara = hardwareMap.get(Servo.class, "rotire_gheara");
         miscare_gheara = hardwareMap.get(Servo.class, "miscare_gheara");
 
-        servoDR.setPosition(0.13);
-        servoST.setPosition(0.13);
-        miscare_gheara.setPosition(0.075);
+        servoDR.setPosition(0.16);
+        servoST.setPosition(0.16);
+        miscare_gheara.setPosition(0.15);
         rotire_gheara.setPosition(0.815);
-        servo_gheara.setPosition(0.34);
+        servo_gheara.setPosition(0.67);
     }
 
     public void brat() {
@@ -64,38 +64,38 @@ public class BratModule {
     }
 
     public void colectare() {
-        servoDR.setPosition(0.165);
-        servoST.setPosition(0.165);
-        miscare_gheara.setPosition(0.36); //0.025
+        servoDR.setPosition(0.14);
+        servoST.setPosition(0.14);
+        miscare_gheara.setPosition(0.4); //0.025
         rotire_gheara.setPosition(0.155);
-        servo_gheara.setPosition(0.7);
+        servo_gheara.setPosition(0.35);
     }
 
     public void basket() {
         servoDR.setPosition(0.57);
         servoST.setPosition(0.57);
-        miscare_gheara.setPosition(0.075);
+        miscare_gheara.setPosition(0.11);
         rotire_gheara.setPosition(0.155);
     }
 
     public void colectare_specimene() {
-        servoDR.setPosition(0.93);
-        servoST.setPosition(0.93);
-        miscare_gheara.setPosition(0.25);
+        servoDR.setPosition(0.92);
+        servoST.setPosition(0.92);
+        miscare_gheara.setPosition(0.3);
         rotire_gheara.setPosition(0.155);
     }
 
     public void specimene() {
-        servoDR.setPosition(0.13);
-        servoST.setPosition(0.13);
-        miscare_gheara.setPosition(0.19);
+        servoDR.setPosition(0.14);
+        servoST.setPosition(0.14);
+        miscare_gheara.setPosition(0.24);
         rotire_gheara.setPosition(0.815);
     }
 
     public void basketup() {
         servoDR.setPosition(0.52);
         servoST.setPosition(0.52);
-        miscare_gheara.setPosition(0);//0.045
+        miscare_gheara.setPosition(0.11);//0.045
         rotire_gheara.setPosition(0.155); //0.155
     }
 
@@ -126,11 +126,11 @@ public class BratModule {
     }
 
     public void open() {
-        servo_gheara.setPosition(0.67);
+        servo_gheara.setPosition(0.35);
     }
 
     public void close() {
-        servo_gheara.setPosition(0.34);
+        servo_gheara.setPosition(0.67);
     }
 
     public void rotire_gheara() {
