@@ -16,7 +16,7 @@ import org.firstinspires.ftc.teamcode.Offseason.Module.IntakeModule;
 import org.firstinspires.ftc.teamcode.RoadRunner.drive.SampleMecanumDrive;
 
 @TeleOp
-public class TeleOP extends LinearOpMode {
+public class TeleOP_normal_solo extends LinearOpMode {
     DistanceSensor sensor;
     int poz = -20;
     @Override
@@ -52,6 +52,8 @@ public class TeleOP extends LinearOpMode {
 
         int state = 1;
 
+        int altstate = 1;
+
 
         waitForStart();
 
@@ -71,7 +73,7 @@ public class TeleOP extends LinearOpMode {
             EndGame.startTime();
             timer_specimene.startTime();
 
-            if(gamepad1.right_bumper) {
+            if(gamepad1.right_bumper && altstate == 3) {
                 brat.close();
                 //intake.open();
                 gheara.reset();
@@ -88,15 +90,20 @@ public class TeleOP extends LinearOpMode {
                 inchis = false;
             }
 
-            if (gamepad1.a) {
+            if (gamepad1.a && altstate == 3) {
                 brat.open();
+                altstate = 4;
             }
 
-            if (gamepad1.b) {
+            if(altstate == 4 && glisiere.getControllerPosition() <= 0) {
+                altstate = 1;
+            }
+
+            if (gamepad1.b && altstate == 3) {
                 brat.close();
             }
 
-            if (gamepad1.left_bumper) {
+            if (gamepad1.left_bumper && (altstate == 3 || altstate == 4)) {
                 brat.colectare();
                 glisiere.goDown(poz);
                 sample = false;
@@ -104,54 +111,60 @@ public class TeleOP extends LinearOpMode {
                 //intake.close();
             }
 
-            if (gamepad2.a) {
+            if (gamepad1.a && altstate == 1 && extendo.getControllerPosition() >= 10) {
                 intake.jos();
             }
 
-            if (gamepad2.b) {
+            if (gamepad1.b && altstate == 1) {
                 intake.sus();
             }
 
-            if (gamepad2.right_trigger > 0.01) {
-                intake.trage(gamepad2.right_trigger);
+            if (gamepad1.right_trigger > 0.01) {
+                intake.trage(gamepad1.right_trigger);
             }
 
-            else if (gamepad2.left_trigger > 0.01) {
-                intake.scuipa(gamepad2.left_trigger * 0.7);
+            else if (gamepad1.left_trigger > 0.01) {
+                intake.scuipa(gamepad1.left_trigger * 0.7);
             }
 
             else {
                 intake.stop();
             }
 
-            if (gamepad2.right_bumper) {
+            if (gamepad1.right_bumper && altstate == 1) {
                 extendo.extinde();
                 //intake.close();
             }
 
-            if (gamepad2.left_bumper) {
+            if (gamepad1.left_bumper && altstate == 2) {
                 extendo.acasa();
                 intake.sus();
+
+                altstate = 3;
             }
 
-            if (gamepad2.dpad_left) {
+            if(extendo.getEncoderPosition() > 5 && extendo.getControllerPosition() == 0) {
+                intake.trage(1);
+            }
+
+            if (gamepad1.dpad_left && (altstate == 1 || altstate == 2)) {
                 extendo.low();
             }
 
-            if (gamepad2.dpad_up) {
+            if (gamepad1.dpad_up && (altstate == 1 || altstate == 2)) {
                 extendo.mediu();
             }
 
-            if (gamepad2.dpad_right) {
+            if (gamepad1.dpad_right && (altstate == 1 || altstate == 2)) {
                 extendo.intermediate();
             }
 
-            if (gamepad2.dpad_down) {
+            if (gamepad1.dpad_down && (altstate == 1 || altstate == 2)) {
                 extendo.high();
             }
-            
 
-            if(gamepad2.x && EndGame.seconds() > 100) {
+
+            if(gamepad1.x && EndGame.seconds() > 100 && (altstate == 1 || altstate == 2)) {
                 gearShiter.torque();
                 gear.reset();
                 bool_gear = true;
@@ -163,15 +176,15 @@ public class TeleOP extends LinearOpMode {
                 bool_gear = false;
             }
 
-            if(gamepad2.y) {
+            if(gamepad1.y) {
                 glisiere.hang();
             }
 
-            if(gamepad1.square) {
+            if(gamepad1.square && altstate == 3) {
                 brat.colectare_specimene();
             }
 
-            if(gamepad1.triangle && state == 1) {
+            /*if(gamepad1.triangle && state == 1) {
                 timer_specimene.reset();
                 glisiere.specimene();
                 brat.specimene();
@@ -195,19 +208,23 @@ public class TeleOP extends LinearOpMode {
                 state = 1;
             }
 
-            if(gamepad1.dpad_up) {
+             */
+
+            if(gamepad1.dpad_up && altstate == 3) {
                 brat.basket_nasol();
             }
 
-            if(gamepad1.dpad_down) {
+            if(gamepad1.dpad_down && altstate == 3) {
                 brat.gheara_orizontala();
             }
 
-            if(sensor.getDistance(DistanceUnit.CM) < 1 && !sample) {
+            if(sensor.getDistance(DistanceUnit.CM) < 2 && !sample && altstate == 1) {
                 gamepad1.rumble(500);
                 gamepad2.rumble(500);
                 sample = true;
+                altstate = 2;
             }
+
 
             /*if(sensor.getDistance(DistanceUnit.CM) < 0.8 && extendo.poz() <= 0 && transfer.seconds() > 0.4) {
                 intake.stop();
@@ -234,13 +251,12 @@ public class TeleOP extends LinearOpMode {
              */
 
 
-            telemetry.addData("Distance:", sensor.getDistance(DistanceUnit.CM));
+            //telemetry.addData("Distance:", sensor.getDistance(DistanceUnit.CM));
             telemetry.addData("MotorDR: ", glisiere.encoder_DR());
             telemetry.addData("MotorST: ", glisiere.encoder_ST());
             telemetry.addData("Poz:", poz);
             telemetry.addLine("------------");
-            telemetry.addData("State: ", state);
-            telemetry.addData("Timer specimene: ", timer_specimene.seconds());
+            telemetry.addData("State:", altstate);
             telemetry.addLine("------------");
             telemetry.addData("Sample: ", sample);
             telemetry.addData("Distance: ", sensor.getDistance(DistanceUnit.CM));

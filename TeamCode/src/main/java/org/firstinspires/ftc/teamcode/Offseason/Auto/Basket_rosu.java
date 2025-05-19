@@ -143,7 +143,7 @@ public class Basket_rosu extends OpMode {
         switch (pathState) {
             case 0:
                 brat.close();
-                intake.open();
+                //intake.open();
                 follower.followPath(scorePreload, true);
                 setPathState(1);
 
@@ -221,7 +221,7 @@ public class Basket_rosu extends OpMode {
                 }
 
                 if(pathTimer.getElapsedTimeSeconds() > 0.85) {
-                    intake.open();
+                    //intake.open();
                     brat.close();
                 }
 
@@ -297,7 +297,7 @@ public class Basket_rosu extends OpMode {
                 }
 
                 if(pathTimer.getElapsedTimeSeconds() > 0.85) {
-                    intake.open();
+                    //intake.open();
                     brat.close();
                 }
 
@@ -373,7 +373,7 @@ public class Basket_rosu extends OpMode {
                 }
 
                 if(pathTimer.getElapsedTimeSeconds() > 0.85) {
-                    intake.open();
+                    //intake.open();
                     brat.close();
                 }
 
@@ -541,7 +541,7 @@ public class Basket_rosu extends OpMode {
                 }
 
                 if(pathTimer.getElapsedTimeSeconds() > 0.85) {
-                    intake.open();
+                    //intake.open();
                     brat.close();
                 }
 
@@ -647,7 +647,7 @@ public class Basket_rosu extends OpMode {
     public void acasa() {
         brat.colectare();
         glisiere.goDown(-10);
-        intake.close();
+        //intake.close();
     }
     public void retrage_extendo() {
         extendo.acasa();

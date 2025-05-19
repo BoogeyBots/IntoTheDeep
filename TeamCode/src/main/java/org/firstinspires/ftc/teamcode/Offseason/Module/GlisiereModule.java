@@ -29,7 +29,7 @@ public class GlisiereModule {
 
         controller.reset();
 
-        controller.setSetPoint(-20);
+        controller.setSetPoint(-7);
     }
     public void init_teleOP() {
         motorST_ENC = hardwareMap.get(DcMotorEx.class, "motorST");
@@ -81,6 +81,7 @@ public class GlisiereModule {
     public int encoder_ST() {
         return motorST_ENC.getCurrentPosition();
     }
+    public double getControllerPosition(){return controller.getSetPoint();}
 
 
 

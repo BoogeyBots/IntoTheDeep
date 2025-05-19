@@ -25,7 +25,7 @@ public class ExtendoModule {
 
         controller.reset();
 
-        controller.setSetPoint(0);
+        controller.setSetPoint(-2);
     }
 
     public void init_teleOP() {
@@ -69,8 +69,9 @@ public class ExtendoModule {
         controller.setSetPoint(0);
     }
 
-    public double poz() {
+    public double getControllerPosition() {
         return controller.getSetPoint();
     }
+    public int getEncoderPosition() {return motor.getCurrentPosition();}
 
 }

@@ -21,9 +21,9 @@ public class BratModule {
         rotire_gheara = hardwareMap.get(Servo.class, "rotire_gheara");
         miscare_gheara = hardwareMap.get(Servo.class, "miscare_gheara");
 
-        servoDR.setPosition(0.14);
-        servoST.setPosition(0.14);
-        miscare_gheara.setPosition(0.4);
+        servoDR.setPosition(0.13);
+        servoST.setPosition(0.13);
+        miscare_gheara.setPosition(0.26);
         rotire_gheara.setPosition(0.155);
         servo_gheara.setPosition(0.35);
     }
@@ -64,9 +64,9 @@ public class BratModule {
     }
 
     public void colectare() {
-        servoDR.setPosition(0.14);
-        servoST.setPosition(0.14);
-        miscare_gheara.setPosition(0.4); //0.025
+        servoDR.setPosition(0.13);
+        servoST.setPosition(0.13);
+        miscare_gheara.setPosition(0.26); //0.025
         rotire_gheara.setPosition(0.155);
         servo_gheara.setPosition(0.35);
     }
@@ -93,8 +93,8 @@ public class BratModule {
     }
 
     public void basketup() {
-        servoDR.setPosition(0.52);
-        servoST.setPosition(0.52);
+        servoDR.setPosition(0.58);
+        servoST.setPosition(0.58);
         miscare_gheara.setPosition(0.11);//0.045
         rotire_gheara.setPosition(0.155); //0.155
     }

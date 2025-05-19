@@ -19,35 +19,35 @@ public class IntakeModule {
     public void init() {
         rotire_right = hardwareMap.get(Servo.class, "rotire_right");
         rotire_left = hardwareMap.get(Servo.class, "rotire_left");
-        clapita = hardwareMap.get(Servo.class, "clapita");
+        //clapita = hardwareMap.get(Servo.class, "clapita");
         motor = hardwareMap.get(DcMotorEx.class, "motor_intake");
 
-        rotire_right.setPosition(0.16);
-        rotire_left.setPosition(0.16);
-        clapita.setPosition(0.4);
+        rotire_right.setPosition(0.18);
+        rotire_left.setPosition(0.18);
+        //clapita.setPosition(0.4);
 
     }
 
     public void init_auto() {
         rotire_right = hardwareMap.get(Servo.class, "rotire_right");
         rotire_left = hardwareMap.get(Servo.class, "rotire_left");
-        clapita = hardwareMap.get(Servo.class, "clapita");
+        //clapita = hardwareMap.get(Servo.class, "clapita");
         motor = hardwareMap.get(DcMotorEx.class, "motor_intake");
 
-        rotire_right.setPosition(0.19);
-        rotire_left.setPosition(0.19);
-        clapita.setPosition(0.1);
+        rotire_right.setPosition(0.21);
+        rotire_left.setPosition(0.21);
+        //clapita.setPosition(0.1);
 
     }
 
     public void init_test() {
         rotire_right = hardwareMap.get(Servo.class, "rotire_right");
         rotire_left = hardwareMap.get(Servo.class, "rotire_left");
-        clapita = hardwareMap.get(Servo.class, "clapita");
+        //clapita = hardwareMap.get(Servo.class, "clapita");
         motor = hardwareMap.get(DcMotorEx.class, "motor_intake");
 
-        rotire_right.setPosition(0.19);
-        rotire_left.setPosition(0.19);
+        rotire_right.setPosition(0.21);
+        rotire_left.setPosition(0.21);
 
     }
 
@@ -65,29 +65,28 @@ public class IntakeModule {
     }
 
     public void jos() {
-        rotire_right.setPosition(0.51);
-        rotire_left.setPosition(0.51);
+        rotire_right.setPosition(0.43);
+        rotire_left.setPosition(0.43);
     }
 
     public void gasire() {
-        rotire_right.setPosition(0.51);
-        rotire_left.setPosition(0.51);
+        rotire_right.setPosition(poz);
+        rotire_left.setPosition(poz);
     }
 
     public void intermediar() {
-        rotire_right.setPosition(0.19);
-        rotire_left.setPosition(0.19);
+        rotire_right.setPosition(0.21);
+        rotire_left.setPosition(0.21);
     }
 
 
 
     public void sus() {
-        rotire_right.setPosition(0.16);
-        rotire_left.setPosition(0.16);
+        rotire_right.setPosition(0.18);
+        rotire_left.setPosition(0.18);
     }
 
-
-
+    /*
     public void close() {
         clapita.setPosition(0.45);
     } //0.392
@@ -99,4 +98,6 @@ public class IntakeModule {
     public void clapita() {
         clapita.setPosition(poz_clapita);
     }
+
+     */
 }

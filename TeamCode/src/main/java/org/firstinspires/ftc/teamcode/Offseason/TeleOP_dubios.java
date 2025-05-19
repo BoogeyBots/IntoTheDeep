@@ -73,7 +73,7 @@ public class TeleOP_dubios extends LinearOpMode {
 
             if(gamepad1.right_bumper) {
                 brat.close();
-                intake.open();
+                //intake.open();
                 gheara.reset();
                 inchis = true;
                 poz = glisiere.encoder_DR() - 5;
@@ -101,7 +101,7 @@ public class TeleOP_dubios extends LinearOpMode {
                 glisiere.goDown(poz);
                 sample = false;
                 //glisiere.goDown(0);
-                intake.close();
+                //intake.close();
             }
 
             if (gamepad2.a) {
@@ -126,7 +126,7 @@ public class TeleOP_dubios extends LinearOpMode {
 
             if (gamepad2.right_bumper) {
                 extendo.extinde();
-                intake.close();
+                //intake.close();
             }
 
             if (gamepad2.left_bumper) {

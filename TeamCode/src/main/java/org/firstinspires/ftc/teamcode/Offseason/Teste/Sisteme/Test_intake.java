@@ -43,13 +43,15 @@ public class Test_intake extends LinearOpMode {
                 intake.gasire();
             }
 
-            if(gamepad1.dpad_up) {
+            /*if(gamepad1.dpad_up) {
                 intake.clapita();
             }
 
             if(gamepad1.dpad_down) {
                 intake.close();
             }
+
+             */
 
             telemetry.addData("Power:", gamepad1.right_trigger * 0.7);
             telemetry.update();

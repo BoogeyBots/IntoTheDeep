@@ -189,7 +189,7 @@ public class Auto5_1 extends OpMode {
 
                 if(pathTimer.getElapsedTimeSeconds() > 1.45) {
                     brat.open();
-                    intake.close();
+                    //intake.close();
                     setPathState(2);
                 }
 
@@ -577,7 +577,7 @@ public class Auto5_1 extends OpMode {
                 }
 
                 if(pathTimer.getElapsedTimeSeconds() > 0.5) {
-                    intake.open();
+                    //intake.open();
                     brat.close();
                 }
 
