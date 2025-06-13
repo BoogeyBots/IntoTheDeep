@@ -199,9 +199,6 @@ public class TeleOP_dubios extends LinearOpMode {
                 brat.basket_nasol();
             }
 
-            if(gamepad1.dpad_down) {
-                brat.gheara_orizontala();
-            }
 
             if(sensor.getDistance(DistanceUnit.CM) < 1 && !sample) {
                 gamepad1.rumble(500);

@@ -11,7 +11,7 @@ public class GlisiereModule {
     public GlisiereModule (HardwareMap hardwareMap) {
         this.hardwareMap = hardwareMap;
     }
-    static double kp = 5.7, ki = 0, kd = 0.05; //4, 0, 0.1
+    static double kp = 6, ki = 0, kd = 0.1; //4, 0, 0.1
     DcMotorEx motorST_ENC, motorDR;
     PIDController controller = new PIDController(kp, ki, kd);
 
@@ -25,11 +25,11 @@ public class GlisiereModule {
         motorST_ENC.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motorDR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        motorDR.setDirection(DcMotorSimple.Direction.REVERSE);
+        motorST_ENC.setDirection(DcMotorSimple.Direction.REVERSE);
 
         controller.reset();
 
-        controller.setSetPoint(-7);
+        controller.setSetPoint(100);
     }
     public void init_teleOP() {
         motorST_ENC = hardwareMap.get(DcMotorEx.class, "motorST");
@@ -38,7 +38,7 @@ public class GlisiereModule {
         motorST_ENC.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motorDR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        motorDR.setDirection(DcMotorSimple.Direction.REVERSE);
+        motorST_ENC.setDirection(DcMotorSimple.Direction.REVERSE);
 
         controller.setSetPoint(0);
     }
@@ -55,7 +55,7 @@ public class GlisiereModule {
     }
 
     public void up() {
-        controller.setSetPoint(1200);
+        controller.setSetPoint(850);
     }
 
     public void up2() {

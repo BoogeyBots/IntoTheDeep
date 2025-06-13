@@ -10,22 +10,18 @@ public class BratModule {
         this.hardwareMap = hardwareMap;
     }
     Servo servoST, servoDR;
-    Servo servo_gheara, rotire_gheara, miscare_gheara;
-    public static double poz_brat, poz_rotire, poz_miscare;
+    Servo servo_gheara, box_tube;
+    public static double poz_brat, poz_gheara, poz_boxtube;
+
 
     public void init() {
         servoDR = hardwareMap.get(Servo.class, "servoDR");
         servoST = hardwareMap.get(Servo.class, "servoST");
 
         servo_gheara = hardwareMap.get(Servo.class, "servo_gheara");
-        rotire_gheara = hardwareMap.get(Servo.class, "rotire_gheara");
-        miscare_gheara = hardwareMap.get(Servo.class, "miscare_gheara");
 
-        servoDR.setPosition(0.13);
-        servoST.setPosition(0.13);
-        miscare_gheara.setPosition(0.26);
-        rotire_gheara.setPosition(0.155);
-        servo_gheara.setPosition(0.35);
+        servoDR.setPosition(0.86);
+        servoST.setPosition(0.86);
     }
 
     public void init_auto() {
@@ -33,14 +29,11 @@ public class BratModule {
         servoST = hardwareMap.get(Servo.class, "servoST");
 
         servo_gheara = hardwareMap.get(Servo.class, "servo_gheara");
-        rotire_gheara = hardwareMap.get(Servo.class, "rotire_gheara");
-        miscare_gheara = hardwareMap.get(Servo.class, "miscare_gheara");
 
         servoDR.setPosition(0.13);
         servoST.setPosition(0.13);
-        miscare_gheara.setPosition(0.4);
-        rotire_gheara.setPosition(0.155);
-        servo_gheara.setPosition(0.67);
+
+        servo_gheara.setPosition(0.3);
     }
 
     public void init_specimene() {
@@ -48,14 +41,53 @@ public class BratModule {
         servoST = hardwareMap.get(Servo.class, "servoST");
 
         servo_gheara = hardwareMap.get(Servo.class, "servo_gheara");
-        rotire_gheara = hardwareMap.get(Servo.class, "rotire_gheara");
-        miscare_gheara = hardwareMap.get(Servo.class, "miscare_gheara");
 
         servoDR.setPosition(0.16);
         servoST.setPosition(0.16);
-        miscare_gheara.setPosition(0.15);
-        rotire_gheara.setPosition(0.815);
-        servo_gheara.setPosition(0.67);
+        servo_gheara.setPosition(0.3);
+    }
+
+    public void colectare() {
+        servoDR.setPosition(0.92);//0.13
+        servoST.setPosition(0.92);
+        servo_gheara.setPosition(0.42);//0.71
+    }
+
+    public void basket() {
+        servoDR.setPosition(0.4); //0.32
+        servoST.setPosition(0.4);
+    }
+
+    public void colectare_specimene() {
+        servoDR.setPosition(0.92);
+        servoST.setPosition(0.92);
+
+    }
+
+    public void specimene() {
+        servoDR.setPosition(0.14);
+        servoST.setPosition(0.14);
+
+    }
+
+    public void basketup() {
+        servoDR.setPosition(0.32);//0.58
+        servoST.setPosition(0.32);
+
+    }
+
+    public void basket_nasol() {
+        servoDR.setPosition(0.49);
+        servoST.setPosition(0.49);
+
+    }
+
+    public void open() {
+        servo_gheara.setPosition(0.42);
+    }//0.67
+
+    public void close() {
+        servo_gheara.setPosition(0.3);
     }
 
     public void brat() {
@@ -63,82 +95,9 @@ public class BratModule {
         servoST.setPosition(poz_brat);
     }
 
-    public void colectare() {
-        servoDR.setPosition(0.13);
-        servoST.setPosition(0.13);
-        miscare_gheara.setPosition(0.26); //0.025
-        rotire_gheara.setPosition(0.155);
-        servo_gheara.setPosition(0.35);
+    public void gheara() {
+        servo_gheara.setPosition(poz_gheara);
     }
 
-    public void basket() {
-        servoDR.setPosition(0.57);
-        servoST.setPosition(0.57);
-        miscare_gheara.setPosition(0.11);
-        rotire_gheara.setPosition(0.155);
-    }
-
-    public void colectare_specimene() {
-        servoDR.setPosition(0.92);
-        servoST.setPosition(0.92);
-        miscare_gheara.setPosition(0.3);
-        rotire_gheara.setPosition(0.155);
-    }
-
-    public void specimene() {
-        servoDR.setPosition(0.14);
-        servoST.setPosition(0.14);
-        miscare_gheara.setPosition(0.24);
-        rotire_gheara.setPosition(0.815);
-    }
-
-    public void basketup() {
-        servoDR.setPosition(0.58);
-        servoST.setPosition(0.58);
-        miscare_gheara.setPosition(0.11);//0.045
-        rotire_gheara.setPosition(0.155); //0.155
-    }
-
-    public void gheara_orizontala() {
-        rotire_gheara.setPosition(0.5);
-    }
-
-    public void basket_nasol() {
-        servoDR.setPosition(0.49);
-        servoST.setPosition(0.49);
-        miscare_gheara.setPosition(0.045);
-        rotire_gheara.setPosition(0.155);
-    }
-
-    public void basket_jos() {
-        servoDR.setPosition(0.56);
-        servoST.setPosition(0.56);
-        miscare_gheara.setPosition(0.045);
-        rotire_gheara.setPosition(0.155);
-    }
-
-    public void rotire_specimene() {
-        rotire_gheara.setPosition(0.917);
-    }
-
-    public void rotire_sample() {
-        rotire_gheara.setPosition(0.13);
-    }
-
-    public void open() {
-        servo_gheara.setPosition(0.35);
-    }
-
-    public void close() {
-        servo_gheara.setPosition(0.67);
-    }
-
-    public void rotire_gheara() {
-        rotire_gheara.setPosition(poz_rotire);
-    }
-
-    public void miscare_gheara() {
-        miscare_gheara.setPosition(poz_miscare);
-    }
 
 }

@@ -28,6 +28,10 @@ public class Test_brat extends LinearOpMode {
                 brat.brat();
             }
 
+            if(gamepad1.y) {
+                brat.gheara();
+            }
+
             if(gamepad1.dpad_right) {
                 brat.open();
             }
@@ -36,20 +40,12 @@ public class Test_brat extends LinearOpMode {
                 brat.close();
             }
 
-            if(gamepad1.circle) {
-                brat.miscare_gheara();
-            }
-
-            if(gamepad1.triangle) {
-                brat.rotire_gheara();
-            }
-
             if(gamepad1.dpad_up) {
                 glisiere.goDown(poz);
             }
 
             if(gamepad1.dpad_down) {
-                glisiere.goDown(-10);
+                glisiere.goDown(0);
             }
 
             glisiere.update();

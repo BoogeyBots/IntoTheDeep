@@ -28,11 +28,15 @@ public class TeleOP extends LinearOpMode {
         IntakeModule intake = new IntakeModule(hardwareMap);
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
-        glisiere.init_teleOP();
+        glisiere.init();
         gearShiter.init();
         extendo.init_teleOP();
         brat.init();
         intake.init();
+
+        while(opModeInInit()) {
+            glisiere.update();
+        }
 
         sensor = hardwareMap.get(DistanceSensor.class, "sensor");
 
@@ -42,16 +46,9 @@ public class TeleOP extends LinearOpMode {
         ElapsedTime gheara = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
         ElapsedTime gear = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
         ElapsedTime EndGame = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
-        ElapsedTime timer_specimene = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
 
         boolean inchis = false;
         boolean bool_gear = false;
-        boolean specimene = false;
-        boolean specimene2 = false;
-        boolean sample = false;
-
-        int state = 1;
-
 
         waitForStart();
 
@@ -69,23 +66,23 @@ public class TeleOP extends LinearOpMode {
             gheara.startTime();
             gear.startTime();
             EndGame.startTime();
-            timer_specimene.startTime();
 
             if(gamepad1.right_bumper) {
                 brat.close();
                 //intake.open();
                 gheara.reset();
                 inchis = true;
-                poz = glisiere.encoder_DR() - 1;
-                if(poz > -5) {
-                    poz = -17;
-                }
             }
 
-            if (inchis && gheara.seconds() > 0.25) {
-                brat.basketup();
-                glisiere.up2();
+            if (inchis && gheara.seconds() > 0.2) {
+                brat.basket();
+                glisiere.up();
                 inchis = false;
+            }
+
+            if(gamepad1.left_bumper) {
+                brat.colectare();
+                glisiere.goDown(190);
             }
 
             if (gamepad1.a) {
@@ -94,14 +91,6 @@ public class TeleOP extends LinearOpMode {
 
             if (gamepad1.b) {
                 brat.close();
-            }
-
-            if (gamepad1.left_bumper) {
-                brat.colectare();
-                glisiere.goDown(poz);
-                sample = false;
-                //glisiere.goDown(0);
-                //intake.close();
             }
 
             if (gamepad2.a) {
@@ -149,7 +138,7 @@ public class TeleOP extends LinearOpMode {
             if (gamepad2.dpad_down) {
                 extendo.high();
             }
-            
+
 
             if(gamepad2.x && EndGame.seconds() > 100) {
                 gearShiter.torque();
@@ -167,85 +156,9 @@ public class TeleOP extends LinearOpMode {
                 glisiere.hang();
             }
 
-            if(gamepad1.square) {
-                brat.colectare_specimene();
-            }
-
-            if(gamepad1.triangle && state == 1) {
-                timer_specimene.reset();
-                glisiere.specimene();
-                brat.specimene();
-                specimene2 = true;
-            }
-
-            if(timer_specimene.seconds() > 2 && specimene2) {
-                state = 2;
-                specimene2 = false;
-            }
-
-            if(gamepad1.triangle && state == 2) {
-                glisiere.goDown(0);
-                timer_specimene.reset();
-                specimene = true;
-            }
-
-            if(specimene && timer_specimene.seconds() > 0.15) {
-                brat.open();
-                specimene = false;
-                state = 1;
-            }
-
-            if(gamepad1.dpad_up) {
-                brat.basket_nasol();
-            }
-
-            if(gamepad1.dpad_down) {
-                brat.gheara_orizontala();
-            }
-
-            if(sensor.getDistance(DistanceUnit.CM) < 1 && !sample) {
-                gamepad1.rumble(500);
-                gamepad2.rumble(500);
-                sample = true;
-            }
-
-            /*if(sensor.getDistance(DistanceUnit.CM) < 0.8 && extendo.poz() <= 0 && transfer.seconds() > 0.4) {
-                intake.stop();
-                brat.close();
-                intake.open();
-                gheara.reset();
-                inchis = true;
-                poz = glisiere.encoder_DR() - 5;
-                if(poz > -3) {
-                    if(EndGame.seconds() < 60) {
-                        poz = -35;
-                    }
-
-                    else if(EndGame.seconds() < 90) {
-                        poz = - 45;
-                    }
-
-                    else {
-                        poz = -55;
-                    }
-                }
-            }
-
-             */
-
-
-            telemetry.addData("Distance:", sensor.getDistance(DistanceUnit.CM));
-            telemetry.addData("MotorDR: ", glisiere.encoder_DR());
-            telemetry.addData("MotorST: ", glisiere.encoder_ST());
-            telemetry.addData("Poz:", poz);
-            telemetry.addLine("------------");
-            telemetry.addData("State: ", state);
-            telemetry.addData("Timer specimene: ", timer_specimene.seconds());
-            telemetry.addLine("------------");
-            telemetry.addData("Sample: ", sample);
-            telemetry.addData("Distance: ", sensor.getDistance(DistanceUnit.CM));
+            telemetry.addData("Controller extendo: ", extendo.getControllerPosition());
+            telemetry.addData("Encoder extendo: ", extendo.getEncoderPosition());
             telemetry.update();
-
 
 
             extendo.update();

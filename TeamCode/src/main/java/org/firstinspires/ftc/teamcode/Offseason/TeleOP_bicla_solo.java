@@ -15,7 +15,7 @@ import org.firstinspires.ftc.teamcode.Offseason.Module.IntakeModule;
 import org.firstinspires.ftc.teamcode.RoadRunner.drive.SampleMecanumDrive;
 
 @TeleOp
-public class TeleOP_normal_solo extends LinearOpMode {
+public class TeleOP_bicla_solo extends LinearOpMode {
 
     enum STATE {
         COLECTARE,
@@ -67,8 +67,8 @@ public class TeleOP_normal_solo extends LinearOpMode {
 
             drive.setWeightedDrivePower(
                     new Pose2d(
-                            -gamepad1.left_stick_y,
-                            -gamepad1.left_stick_x,
+                            gamepad1.left_stick_y,
+                            gamepad1.left_stick_x,
                             -gamepad1.right_stick_x * angle
                     )
             );
@@ -110,7 +110,7 @@ public class TeleOP_normal_solo extends LinearOpMode {
 //                    brat.colectare();
 //                    glisiere.goDown(190);
                     brat.colectare();
-                    glisiere.goDown(165);
+                    glisiere.goDown(160);
                 }
 
                 if (gamepad1.a) {
@@ -120,21 +120,12 @@ public class TeleOP_normal_solo extends LinearOpMode {
                 if (gamepad1.b) {
                     intake.sus();
                 }
-
-                if (gamepad1.dpad_left) extendo.low();
-                if (gamepad1.dpad_up) extendo.mediu();
-                if (gamepad1.dpad_right) extendo.intermediate();
-                if (gamepad1.dpad_down) extendo.high();
             }
 
 
             if (mode == STATE.PUNCTARE) {
                 if (gamepad1.a) {
                     brat.open();
-                }
-
-                if(gamepad1.dpad_down) {
-                    glisiere.goDown(350);
                 }
             }
 
@@ -150,6 +141,12 @@ public class TeleOP_normal_solo extends LinearOpMode {
             else {
                 intake.stop();
             }
+
+
+            if (gamepad1.dpad_left) extendo.low();
+            if (gamepad1.dpad_up) extendo.mediu();
+            if (gamepad1.dpad_right) extendo.intermediate();
+            if (gamepad1.dpad_down) extendo.high();
 
 
             if (gamepad1.square && endGame.seconds() > 100) {

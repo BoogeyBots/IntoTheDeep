@@ -15,11 +15,17 @@ import org.firstinspires.ftc.teamcode.Offseason.Module.GearShifterModule;
 
 @Config
 @TeleOp (name = "Tunare PID glisiere")
-public class PID_glisiere extends LinearOpMode{
+public class PID_glisiere extends LinearOpMode {
     public DcMotorEx motorST_ENC, motorDR;
     public Servo servoDR, servoST;
     int poz_min = 0;
     int poz_max = 2000;
+    public static double poz_servo;
+    Servo rotire_left, rotire_right, clapita;
+    DcMotorEx motor;
+
+    Servo servo_gheara, box_tube;
+
 
     public static double p = 0, i = 0, d = 0;
 
@@ -41,6 +47,9 @@ public class PID_glisiere extends LinearOpMode{
         motorDR = hardwareMap.get(DcMotorEx.class, "motorDR");
         servoDR = hardwareMap.get(Servo.class, "servoDR");
         servoST = hardwareMap.get(Servo.class, "servoST");
+        rotire_right = hardwareMap.get(Servo.class, "rotire_right");
+        rotire_left = hardwareMap.get(Servo.class, "rotire_left");
+        servo_gheara = hardwareMap.get(Servo.class, "servo_gheara");
 
         motorDR.setDirection(DcMotorSimple.Direction.REVERSE);
 
@@ -52,20 +61,27 @@ public class PID_glisiere extends LinearOpMode{
 
         controller.reset();
 
-        servoDR.setPosition(0.2);
-        servoST.setPosition(0.2);
-
+        //servoDR.setPosition(0.2);
+      //  servoST.setPosition(0.2);
+        rotire_right.setPosition(0.8);
+        rotire_left.setPosition(0.8);
+        servo_gheara.setPosition(0.8);
         waitForStart();
 
         while (opModeIsActive()) {
             update();
 
-            if (gamepad1.a) {
-                controller.setSetPoint(600);
+            if(gamepad1.a) {
+                servoDR.setPosition(poz_servo);
+                servoST.setPosition(poz_servo);
             }
 
             if(gamepad1.b) {
                 controller.setSetPoint(target);
+            }
+
+            if(gamepad1.y) {
+                controller.setSetPoint(0);
             }
 
             else {
@@ -79,8 +95,6 @@ public class PID_glisiere extends LinearOpMode{
             if(gamepad1.dpad_down) {
                 gear.torque();
             }
-
-
 
             dashboard.updateConfig();
             telemetry.addData("A AJUNS?", controller.atSetPoint());
